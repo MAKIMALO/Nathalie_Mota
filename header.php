@@ -10,5 +10,12 @@
 
 <body>
 
-    <?php wp_body_open(); ?>
+<?php wp_body_open(); ?>
     
+<header>
+    <nav>
+
+
+    </nav>
+
+</header>
