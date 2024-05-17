@@ -18,4 +18,11 @@ function register_my_menus() {
 }
 add_action( 'after_setup_theme', 'register_my_menus');
 
+
+// Ajout de la fonction Walker
+function register_custom_nav_walker(){
+    require_once get_template_directory() . '/walker-menus.php';
+}
+add_action( 'after_setup_theme', 'register_custom_nav_walker' );
+
 ?>

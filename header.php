@@ -16,16 +16,17 @@
         <nav class="navbar">
             <div class="logo">
                 <a href="http://localhost/nathalie_mota/">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Logo Nathalie Mota"></a>
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.webp" alt="Logo Nathalie Mota">
+                </a>
             </div>
-            <div class="header_site_menu">
+            <div class="header_site_menu" role="navigation" aria-lebel="<?php _e('Menu principal', 'text-domain'); ?>">
                 <?php wp_nav_menu(
                     array(
                         'theme_location' => 'main-menu',
-                        'container' => 'false'
+                        'container' => 'false',
+                        'walker' => new NMota_Walker_Nav_Menu()
                     )
-                );
-                ?>
+                ); ?>
             </div>
         </nav>
 
