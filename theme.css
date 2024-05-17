@@ -1,33 +1,7 @@
-/*** Google Fonts ***/
-
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/poppins/Poppins-Light.woff2') format("woff2");
-    font-display: swap;
-    font-style: light;
-    font-weight: 300;
+/*** Général ***/
+* {
+    font-family: 'Space Mono', sans-serif;
 }
 
-@font-face {
-    font-family: 'Space Mono';
-    src: url('assets/fonts/space_mono/SpaceMono-BoldItalic.woff2') format("woff2");
-    font-display: swap;
-    font-style: bolditalic;
-    font-weight: 700;
-}
 
-@font-face {
-    font-family: 'Space Mono';
-    src: url('assets/fonts/space_mono/SpaceMono-Italic.woff2') format("woff2");
-    font-display: swap;
-    font-style: italic;
-    font-weight: 400;
-}
-
-@font-face {
-    font-family: 'Space Mono';
-    src: url('assets/fonts/space_mono/SpaceMono-Regular.woff2') format("woff2");
-    font-display: swap;
-    font-style: regular;
-    font-weight: 400;
-}
+/*** Header ***/

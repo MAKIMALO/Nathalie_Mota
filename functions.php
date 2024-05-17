@@ -5,13 +5,17 @@
         wp_enqueue_style('theme-style', get_template_directory_uri() . '/theme.css', array(), 
         filemtime(get_stylesheet_directory() . '/theme.css'), 'all');
     }
-?>
 
-<?php
 
-function register_my_menu() {
-    register_nav_menu( 'main-menu', __( 'Menu principal', 'text-domain' ));
+// Ajout de l'onglet "Menus" sur le dashboard dans WP - dossier "Apparence" 
+function register_my_menus() {
+    register_nav_menus(
+        array(
+            'main-menu'=> __( 'Menu principal', 'text-domain'),
+            'footer-menu' => __( 'Pied de page', 'text-domain')
+        )
+    );
 }
-add_action( 'after_setup_theme', 'register_my_menu');
+add_action( 'after_setup_theme', 'register_my_menus');
 
 ?>

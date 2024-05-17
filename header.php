@@ -11,11 +11,22 @@
 <body>
 
 <?php wp_body_open(); ?>
-    
-<header>
-    <nav>
+<div id="page" class="site">
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="http://localhost/nathalie_mota/">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Logo Nathalie Mota"></a>
+            </div>
+            <div class="header_site_menu">
+                <?php wp_nav_menu(
+                    array(
+                        'theme_location' => 'main-menu',
+                        'container' => 'false'
+                    )
+                );
+                ?>
+            </div>
+        </nav>
 
-
-    </nav>
-
-</header>
+    </header>
