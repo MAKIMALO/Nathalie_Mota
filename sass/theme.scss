@@ -2,14 +2,14 @@
 
 @font-face {
     font-family: 'Space Mono';
-    src: url('assets/fonts/space_mono/SpaceMono-BoldItalic.woff2') format("woff2");
+    src: url('../assets/fonts/space_mono/SpaceMono-BoldItalic.woff2') format("woff2");
     font-style: bolditalic;
     font-weight: 700;
 }
 
 @font-face {
     font-family: 'Space Mono';
-    src: url('assets/fonts/space_mono/SpaceMono-Regular.woff2') format("woff2");
+    src: url('../assets/fonts/space_mono/SpaceMono-Regular.woff2') format("woff2");
     font-style: regular;
     font-weight: 400;
 }
@@ -43,24 +43,21 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.navbar {
-    display: flex;
-    flex-direction: row;
-    width: 85%;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo img {
-    width:216px;
-    height: 14px;
-}
-
-.header-site-menu {
-    width: 200px;
-    display: flex;
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        width: 85%;
+        justify-content: space-between;
+        align-items: center;
+        .logo img {
+            width:216px;
+            height: 14px;
+        }
+        .header-site-menu {
+            width: 200px;
+            display: flex;
+        }
+    }
 }
 
 #menu-header {
@@ -71,15 +68,13 @@ header {
     width: 400px;
     font-size: 16px;
     padding-left: 0px;
-}
-
-#menu-header li {
-    list-style-type: none;
-}
-
-#menu-header li a {
-    text-decoration: none;
-    color: black;
+    > li {
+        list-style-type: none;
+        > a {
+            text-decoration: none;
+            color: black;
+        }
+    }
 }
 
 .current-menu-item a {
@@ -105,13 +100,11 @@ header {
     gap: 90px;
     font-size: 16px;
     padding-left: 0px;
-}
-
-#menu-footer li {
-    list-style-type: none;
-}
-
-#menu-footer li a {
-    text-decoration: none;
-    color: black;
+    > li {
+        list-style-type: none;
+        > a {
+            text-decoration: none;
+            color: black;
+        }
+    }
 }
