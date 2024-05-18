@@ -28,6 +28,8 @@
                     )
                 ); ?>
             </div>
+            <div id="icons">
+            </div>
         </nav>
 
     </header>
