@@ -6,6 +6,12 @@
         filemtime(get_stylesheet_directory() . '/sass/theme.css'), 'all');
     }
 
+    add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts' );
+    function theme_enqueue_scripts() {
+        // Enqueue burger script
+        wp_enqueue_script( 'burger-script', get_template_directory_uri() . '/js/burger.js', array(), '1.2', true );
+    }    
+    
 
 // Ajout de l'onglet "Menus" sur le dashboard dans WP - dossier "Apparence" 
 function register_my_menus() {
@@ -24,5 +30,6 @@ function register_custom_nav_walker(){
     require_once get_template_directory() . '/walker-menus.php';
 }
 add_action( 'after_setup_theme', 'register_custom_nav_walker' );
+
 
 ?>

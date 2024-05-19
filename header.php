@@ -28,8 +28,17 @@
                     )
                 ); ?>
             </div>
-            <div id="icons">
-            </div>
+            <a id="openBtn" href="#">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/burger_menu.png" alt="Logo burger menu">
+            </a>
+            <a id="closeBtn" href="#">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/close_burger_menu.png" alt="Croix de fermeture du menu">
+            </a>
         </nav>
 
     </header>
+
+<script src="<?php echo get_template_directory_uri(); ?>/js/burger.js" type="text/javascript"></script>
+
+</body>
+</html>
