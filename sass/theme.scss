@@ -77,7 +77,6 @@ header {
     flex-direction: row;
     justify-content: flex-end;
     gap: 50px;
-    width: 400px;
     font-size: 16px;
     padding-left: 0px;
     > li {
@@ -144,9 +143,10 @@ header {
 
     .header-site-menu.active {
         display: block;
-        background-color: #E00000;
-        transition: top 0.8s ease;
-        position: absolute;
+    }
+
+    #closeBtn {
+        display: none;
     }
 
     .header-site-menu.active ~ #closeBtn {
@@ -157,6 +157,22 @@ header {
         display: none;
     }
 
+    #menu-header {
+        display: flex;
+        position: fixed;
+        top: 60px;
+        width: 100%;
+        height: 80vh;
+        left: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #E00000;
+        font-size: 44px;
+        > li > a {
+            color: white;
+        }
+    }
 }
 
 /*** FOOTER ***/
