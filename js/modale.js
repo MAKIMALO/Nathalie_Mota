@@ -13,9 +13,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   
     // Fermer la modale
-    window.onclick = function(event) {
-      if (event.target == modal && !modal.contains(event.target) && modal.classList.contains('open')) {
+    function closeModal() {
         modal.classList.remove('open');
-      }
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal ) {
+          modal.style.display = "none";
+        }
     }
   });

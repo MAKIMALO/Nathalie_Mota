@@ -298,33 +298,102 @@ header .navbar #closeBtn {
     font-size: 28px;
   }
 }
-/*** MODALE CONTACT ***/
+/*** CONTACT MODALE ***/
 .modale-overlay {
   display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 80%;
+  max-width: 600px;
+  height: auto;
+  max-height: 90%;
+  overflow-y: auto;
+  background-color: white;
+  border: 5px solid black;
+}
+.modale-overlay .img_contact_modale {
+  height: 106px;
+  width: 100%;
 }
 .modale-overlay .modale {
-  margin: 15% auto;
   padding: 20px;
-  border: 1px solid black;
-  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modale-overlay.open {
   display: block;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 600px;
-  height: 770px;
-  overflow: auto;
-  background-color: white;
 }
 
 .closeBtn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
   cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 20px;
+}
+
+.wpcf7 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wpcf7 .wpcf7-form {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+.wpcf7 .wpcf7-form p {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.wpcf7 .wpcf7-form label {
+  font-family: "Poppins";
+  font-weight: bold;
+  font-size: 12px;
+  color: #313144;
+  width: auto !important;
+  display: inline-block !important;
+}
+.wpcf7 .wpcf7-form .wpcf7-submit {
+  font-size: 12px;
+  border-color: #D8D8D8;
+  background-color: #D8D8D8;
+  border-radius: 5px;
+  height: 50px;
+  width: 100%;
+  max-width: 340px !important;
+}
+.wpcf7 .wpcf7-form .wpcf7-submit:hover {
+  background-color: #000000;
+  color: white;
+}
+
+.wpcf7-form-control-wrap .wpcf7-form-control {
+  border: 1px solid #B8BBC2;
+  border-radius: 5px;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+.wpcf7-form-control-wrap .wpcf7-text,
+.wpcf7-form-control-wrap .wpcf7-textarea {
+  height: 40px;
+  width: 100% !important;
+}
+
+.wpcf7-form-control-wrap .wpcf7-textarea {
+  height: 210px;
 }/*# sourceMappingURL=theme.css.map */
