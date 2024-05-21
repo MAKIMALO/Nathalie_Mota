@@ -8,6 +8,9 @@
 
     add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts' );
     function theme_enqueue_scripts() {
+        // Enqueue modale script
+        wp_enqueue_script( 'modale-script', get_template_directory_uri() . '/js/modale.js', array(), '1.2', true );
+
         // Enqueue burger script
         wp_enqueue_script( 'burger-script', get_template_directory_uri() . '/js/burger.js', array(), '1.2', true );
     }    
