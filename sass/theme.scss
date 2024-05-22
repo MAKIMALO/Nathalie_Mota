@@ -177,6 +177,7 @@ header {
     #menu-header {
         display: flex;
         position: fixed;
+        z-index: 2;
         top: 60px;
         width: 100%;
         height: 80vh;
@@ -355,9 +356,20 @@ header {
     overflow-y: auto;
     background-color: white;
     border: 5px solid black;
-    .img_contact_modale {
-        height: 106px;
-        width: 100%;
+    .modale-header {
+        position: relative;
+        .closeBtn {
+            position: absolute;
+            top: 4%;
+            right: -20%;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .img_contact_modale {
+            height: 106px;
+            width: 100%;
+            padding-top: 12px;
+        }
     }
     .modale {
         padding: 20px;
@@ -369,15 +381,9 @@ header {
 
 .modale-overlay.open {
     display: block;
+    z-index: 3;
 }
 
-.closeBtn {
-    cursor: pointer;
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    font-size: 20px;
-}
 
 .wpcf7 {
     width: 100%;
