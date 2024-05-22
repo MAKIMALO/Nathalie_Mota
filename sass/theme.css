@@ -315,22 +315,34 @@ header .navbar #closeBtn {
   background-color: white;
   border: 5px solid black;
 }
-.modale-overlay .modale-header {
+.modale-overlay .modale-global {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+}
+.modale-overlay .modale-global .modale-header {
   position: relative;
 }
-.modale-overlay .modale-header .closeBtn {
+.modale-overlay .modale-global .modale-header .closeBtn {
   position: absolute;
-  top: 4%;
-  right: -20%;
-  font-size: 20px;
+  right: 0px;
+  border-radius: 20px;
+  height: 20px;
+  width: 20px;
+  border: 1px solid black;
+  background: white;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease;
 }
-.modale-overlay .modale-header .img_contact_modale {
+.modale-overlay .modale-global .modale-header .img_contact_modale {
   height: 106px;
   width: 100%;
   padding-top: 12px;
 }
-.modale-overlay .modale {
+.modale-overlay .modale-global .modale {
   padding: 20px;
   display: flex;
   justify-content: center;
