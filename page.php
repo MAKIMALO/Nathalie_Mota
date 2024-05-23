@@ -6,13 +6,11 @@
 		<h1>PHOTOGRAPHE EVENT</h1>
 	</section>
 
-	<?php if( have_posts() ) : while( have_posts() ) : the_post(); ?>
-    
-		<h1><?php the_title(); ?></h1>
+	<section class="custom-posts">         
 
-    	<?php the_content(); ?>
+    <?php get_template_part( 'template-parts/single' ); ?>
 
-	<?php endwhile; endif; ?>
+    </section>
 
 </main>
 
