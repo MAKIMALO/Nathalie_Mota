@@ -22,6 +22,18 @@
 }
 
 
+/*** VARIABLES COULEURS ***/
+
+$primary-color : #E00000;
+$secondary-color : #FE5858;
+$third-color : #FFD6D6;
+$text-color : #000000;
+$modale-text-color : #313144;
+$ddd : #C4C4C4;
+$border-color : #B8B8C2;
+$button-background-color : #D8D8D8;
+$ddd : #E5E5E5;
+
 /*** GENERAL ***/
 
 * {
@@ -185,7 +197,7 @@ header {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background-color: #E00000;
+        background-color: $primary-color;
         font-size: 44px;
         > li > a {
             color: white;
@@ -220,7 +232,7 @@ header {
         }
         > a {
             text-decoration: none;
-            color: black;
+            color: $text-color;
         }
     }
 }
@@ -352,7 +364,8 @@ header {
     width: 80%;
     max-width: 600px;
     height: auto;
-    max-height: 90%;
+    max-height: 95%;
+    margin-top: 10px;
     overflow-y: auto;
     background-color: white;
     border: 5px solid black;
@@ -412,6 +425,7 @@ header {
         text-align: left;
         p {
             width: 100%;
+            margin-bottom: 0px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -421,7 +435,7 @@ header {
             font-family: 'Poppins';
             font-weight: bold;
             font-size: 12px;
-            color: #313144;
+            color: $modale-text-color;
             width: auto !important;
             display: inline-block !important;
         }
@@ -441,11 +455,13 @@ header {
     }
 }
 
-.wpcf7-form-control-wrap .wpcf7-form-control {
-    border: 1px solid #B8BBC2;
-    border-radius: 5px;
-    width: 100% !important;
-    box-sizing: border-box;
+.wpcf7-form-control-wrap {
+    .wpcf7-form-control {
+        border: 1px solid #B8BBC2;
+        border-radius: 5px;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
 }
 
 .wpcf7-form-control-wrap .wpcf7-text,

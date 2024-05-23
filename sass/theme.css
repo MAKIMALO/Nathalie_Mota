@@ -17,6 +17,7 @@
   font-style: light;
   font-weight: 300;
 }
+/*** VARIABLES COULEURS ***/
 /*** GENERAL ***/
 * {
   font-family: "Space Mono", sans-serif;
@@ -193,7 +194,7 @@ header .navbar #closeBtn {
 }
 #menu-footer > li > a {
   text-decoration: none;
-  color: black;
+  color: #000000;
 }
 
 @media (max-width: 750px) {
@@ -310,7 +311,8 @@ header .navbar #closeBtn {
   width: 80%;
   max-width: 600px;
   height: auto;
-  max-height: 90%;
+  max-height: 95%;
+  margin-top: 10px;
   overflow-y: auto;
   background-color: white;
   border: 5px solid black;
@@ -371,6 +373,7 @@ header .navbar #closeBtn {
 }
 .wpcf7 .wpcf7-form p {
   width: 100%;
+  margin-bottom: 0px;
   display: flex;
   flex-direction: column;
   justify-content: center;
