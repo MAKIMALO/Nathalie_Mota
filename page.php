@@ -8,23 +8,23 @@
 	</section>
 	<?php endif; ?>
 
-    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-        <article class="page-content">
-            <header class="page-header">
-                <h1 class="page-title"><?php the_title(); ?></h1>
-            </header>
-            <div class="page-body">
-                <?php the_content(); ?>
-            </div>
-        </article>
-    <?php endwhile; endif; ?>
+    <?php if (have_posts()) : ?>
+        <?php while (have_posts()) : the_post(); ?>
+            <article class="page-content">
+                <header class="page-header">
+                    <h1 class="page-title"><?php the_title(); ?></h1>
+                </header>
+                <div class="page-body">
+                    <?php the_content(); ?>
+                </div>
+            </article>
+        <?php endwhile; ?>
+    <?php endif; ?>
 
-	<!-- Appelle de la page "posts"
-	<section class="custom-posts">         
-	/*
-    <?php get_template_part( 'template-parts/single' ); ?>
-	*/
-	</section> -->
+
+    <?php if (is_front_page()) : ?>
+        <?php get_template_part('template-parts/single-photos'); ?>
+    <?php endif; ?>
 
 </main>
 
