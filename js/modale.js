@@ -4,28 +4,32 @@ document.addEventListener('DOMContentLoaded', function() {
   var modal = document.getElementById('contactModal');
   var links = document.querySelectorAll('.contactLink');
   var closeBtn = document.querySelector('.closeBtn');
-  var body = document.querySelector('body');
 
   // Ouvrir la modale
   links.forEach(function(link) {
       link.addEventListener('click', function(event) {
           event.preventDefault();
-          event.stopPropagation(); // Empêche la propagation de l'événement de clic
+          event.stopPropagation();
           modal.classList.add('open');
       });
   });
 
   // Fermer la modale via la croix
   closeBtn.addEventListener('click', function(event) {
-      event.stopPropagation(); // Empêche la propagation de l'événement de clic
+      event.stopPropagation();
       closeModal();
   });
 
   // Fermer la modale en cliquant en dehors de la modale
-  body.addEventListener('click', function(event) {
-      if (modal.classList.contains('open') && !modal.contains(event.target)) {
+  document.addEventListener('click', function(event) {
+      if (modal.classList.contains('open') && !modal.querySelector('.modale-global').contains(event.target)) {
           closeModal();
       }
+  });
+
+  // Empêcher la propagation des clics à l'intérieur de la modale
+  modal.querySelector('.modale-global').addEventListener('click', function(event) {
+      event.stopPropagation();
   });
 
   // Fonction pour fermer la modale
