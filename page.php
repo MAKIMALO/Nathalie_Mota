@@ -8,6 +8,7 @@
 	</section>
 	<?php endif; ?>
 
+    <!-- Affichage de chaque page du menu individuellement -->
     <?php if (have_posts()) : ?>
         <?php while (have_posts()) : the_post(); ?>
             <article class="page-content">
@@ -21,10 +22,33 @@
         <?php endwhile; ?>
     <?php endif; ?>
 
+    
+    <!-- Affichage de l'ensemble des pages "photos"-->
+    <div class="photos-gallery">
+        <h1>Photo Gallery</h1>
+        <?php
+        $args = array(
+            'post_type' => 'photos',
+            'posts_per_page' => 8,
+        );
+        $query = new WP_Query( $args );
 
-    <?php if (is_front_page()) : ?>
-        <?php get_template_part('template-parts/single-photos'); ?>
-    <?php endif; ?>
+        if ( $query->have_posts() ) :
+            while ( $query->have_posts() ) : $query->the_post(); ?>
+                <div class="photo-item">
+                    <a href="<?php the_permalink(); ?>">
+                        <?php if ( has_post_thumbnail() ) {
+                            the_post_thumbnail( 'medium' ); // Taille de l'image
+                        } ?>
+                        <h2><?php the_title(); ?></h2>
+                    </a>
+                </div>
+            <?php endwhile;
+        else : ?>
+            <p>No photos found</p>
+        <?php endif;
+        wp_reset_postdata(); ?>
+    </div>
 
 </main>
 
