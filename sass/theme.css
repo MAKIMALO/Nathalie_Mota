@@ -443,4 +443,32 @@ header .navbar #closeBtn {
 
 .wpcf7-form-control-wrap .wpcf7-textarea {
   height: 210px;
+}
+
+/*** SINGLE-PHOTOS ***/
+.single-photos {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.single-photos .single-photos-part-one {
+  height: 63%;
+  display: flex;
+  flex-direction: column;
+}
+.single-photos .single-photos-part-one .photo-details {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.single-photos .single-photos-part-one .photo-details .photo-meta {
+  width: 50%;
+}
+.single-photos .single-photos-part-one .photo-details .photo-image {
+  width: 50%;
+}
+.single-photos .single-photos-part-two {
+  height: 33%;
+  display: flex;
 }/*# sourceMappingURL=theme.css.map */

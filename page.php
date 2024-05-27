@@ -23,24 +23,24 @@
     <?php endif; ?>
 
     
-    <!-- Affichage de l'ensemble des pages "photos"-->
-    <div class="photos-gallery">
-        <h1>Photo Gallery</h1>
+    <!-- Affichage de l'ensemble des pages "photos" -->
+    <section class="photos-gallery">
         <?php
         $args = array(
             'post_type' => 'photos',
             'posts_per_page' => 8,
         );
-        $query = new WP_Query( $args );
+        $loop = new WP_Query( $args );
 
-        if ( $query->have_posts() ) :
-            while ( $query->have_posts() ) : $query->the_post(); ?>
+        if ( $loop->have_posts() ) :
+            while ( $loop->have_posts() ) : $loop->the_post(); ?>
                 <div class="photo-item">
                     <a href="<?php the_permalink(); ?>">
                         <?php if ( has_post_thumbnail() ) {
                             the_post_thumbnail( 'medium' ); // Taille de l'image
                         } ?>
                         <h2><?php the_title(); ?></h2>
+
                     </a>
                 </div>
             <?php endwhile;
@@ -48,7 +48,7 @@
             <p>No photos found</p>
         <?php endif;
         wp_reset_postdata(); ?>
-    </div>
+    </section>
 
 </main>
 

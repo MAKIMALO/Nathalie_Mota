@@ -34,4 +34,47 @@ function register_custom_nav_walker(){
 }
 add_action( 'after_setup_theme', 'register_custom_nav_walker' );
 
+
+// Récupération des valeurs du champ personnalisé "Référence" de chaque photo pour personnaliser l'URL
+function add_reference_to_permalink($post_link, $post) {
+    if ($post->post_type == 'photos') {
+        $reference = get_field('reference', $post->ID);
+        if ($reference) {
+            // Ajouter la référence à la fin de l'URL
+            $post_link = trailingslashit($post_link) . sanitize_title($reference);
+        }
+    }
+    return $post_link;
+}
+add_filter('post_type_link', 'add_reference_to_permalink', 10, 2);
+
+
+function custom_rewrite_rule() {
+    add_rewrite_rule(
+        '^photos/([^/]+)/([^/]+)/?$',
+        'index.php?post_type=photos&name=$matches[1]&reference=$matches[2]',
+        'top'
+    );
+}
+add_action('init', 'custom_rewrite_rule');
+
+
+function custom_query_vars($vars) {
+    $vars[] = 'reference';
+    return $vars;
+}
+add_filter('query_vars', 'custom_query_vars');
+
+
+function change_photo_slug_structure($args, $post_type) {
+    if ($post_type == 'photos') {
+        $args['rewrite'] = array(
+            'slug' => 'photos',
+            'with_front' => false
+        );
+    }
+    return $args;
+}
+add_filter('register_post_type_args', 'change_photo_slug_structure', 10, 2);
+
 ?>
