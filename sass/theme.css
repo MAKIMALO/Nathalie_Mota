@@ -51,7 +51,7 @@ header {
 header .navbar {
   display: flex;
   flex-direction: row;
-  width: 85%;
+  width: 90%;
   justify-content: space-between;
   align-items: center;
 }
@@ -447,28 +447,146 @@ header .navbar #closeBtn {
 
 /*** SINGLE-PHOTOS ***/
 .single-photos {
-  width: 100vw;
-  height: 100vh;
+  width: 90vw;
+  max-width: 1440px;
+  margin: 0 auto;
+  height: auto;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 100px;
 }
 .single-photos .single-photos-part-one {
-  height: 63%;
-  display: flex;
-  flex-direction: column;
-}
-.single-photos .single-photos-part-one .photo-details {
   width: 100%;
+  height: auto;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  gap: 2%;
 }
-.single-photos .single-photos-part-one .photo-details .photo-meta {
-  width: 50%;
+.single-photos .single-photos-part-one .photo-meta {
+  width: 47%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 390px;
+  border-bottom: 1px solid black;
 }
-.single-photos .single-photos-part-one .photo-details .photo-image {
-  width: 50%;
+.single-photos .single-photos-part-one .photo-meta h2 {
+  font-size: 66px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 58px;
+  align-items: center;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.single-photos .single-photos-part-one .photo-meta p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  align-items: center;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.single-photos .single-photos-part-one .photo-image {
+  flex: 1;
+}
+.single-photos .single-photos-part-one .photo-image img {
+  width: 100%;
+  max-width: 100%;
+  height: 844px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .single-photos .single-photos-part-two {
-  height: 33%;
+  width: 90vw;
+  height: auto;
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 10px 0px 10px 0px;
+  border-bottom: 1px solid black;
+}
+.single-photos .single-photos-part-two .single-photos-contact-button {
+  width: 42vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.single-photos .single-photos-part-two .single-photos-contact-button p {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 21px;
+  margin: 0;
+}
+.single-photos .single-photos-part-two .single-photos-contact-button button {
+  width: 17vw;
+  height: 50px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s color 0.3s;
+}
+.single-photos .single-photos-part-two .single-photos-contact-button button:hover {
+  background-color: #000000;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.02);
+  color: white;
+}
+.single-photos .single-photos-part-two .single-contact-photo {
+  width: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-left: auto;
+}
+.single-photos .single-photos-part-two .single-contact-photo .thumbnail-photo img {
+  width: 81px;
+  height: 71px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.single-photos .single-photos-part-two .single-contact-photo .arrows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+}
+.single-photos .single-photos-part-two .single-contact-photo .arrows :hover {
+  font-weight: bold;
+}
+.single-photos .single-photos-part-two .single-contact-photo .arrows img {
+  margin: 0 10px;
+}
+.single-photos .single-photos-part-three {
+  width: 90vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.single-photos .single-photos-part-three p {
+  font-size: 18px;
+  line-height: 27px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 40px 0px 40px 0px;
+}
+.single-photos .single-photos-part-three .photos-apparentees {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 500px;
+  gap: 2%;
+}
+.single-photos .single-photos-part-three .photos-apparentees img {
+  width: 50%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=theme.css.map */
