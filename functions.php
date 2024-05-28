@@ -13,6 +13,9 @@
 
         // Enqueue burger script
         wp_enqueue_script( 'burger-script', get_template_directory_uri() . '/js/burger.js', array(), '1.2', true );
+
+        // Enqueue script
+        wp_enqueue_script( 'script', get_template_directory_uri() . '/js/script.js', array(), '1.2', true );
     }    
     
 

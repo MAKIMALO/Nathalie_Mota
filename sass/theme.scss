@@ -486,6 +486,10 @@ header {
             width: auto !important;
             display: inline-block !important;
         }
+        input,
+        textarea {
+            padding-left: 6px;
+        }
         .wpcf7-submit {
             font-size: 12px;
             border-color: #D8D8D8;
@@ -542,6 +546,7 @@ header {
         flex-direction: row;
         justify-content: center;
         gap: 2%;
+        padding-top: 30px;
             .photo-meta {
                 width: 50%;
                 order: 1;
@@ -549,6 +554,24 @@ header {
                 flex-direction: column;
                 padding-top: 390px;
                 border-bottom: 1px solid black;
+                h2 {
+                    font-size: clamp(46px, 6vw, 66px);
+                    font-style: italic;
+                    font-weight: 400;
+                    line-height: 1;
+                    align-items: center;
+                    text-transform: uppercase;
+                    margin-bottom: 20px;
+                }
+                p {
+                    margin: 12px 0px;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 21px;
+                    letter-spacing: 0.1em;
+                    text-transform: uppercase;
+                }
             }
             .photo-image {
                 width: 50%;
@@ -604,6 +627,7 @@ header {
             display: flex;
             align-items: flex-end;
             flex-direction: column;
+            position: relative;
             .thumbnail-photo img {
                 width: 81px;
                 height: 71px;
@@ -611,15 +635,24 @@ header {
             }
             .arrows {
                 display: flex;
-                justify-content: flex-end;
+                justify-content: center;
                 align-items: center;
-                width: 100%;
                 cursor: pointer;
-                :hover {
-                    font-weight: bold;
-                }
+                padding-top: 10px;
+                padding-left: 10px;
                 img {
-                    margin: 0 10px;
+                    transition: transform 0.2s, filter 0.2s;
+                }
+                img:hover {
+                    transform: scale(1.5);
+                    filter: drop-shadow(4px 4px 10px rgba(0,0,0,0.5));
+                }
+                .arrow_right {
+                    margin-left: 10px;
+                    margin-right: 6px;
+                }
+                .arrow_left {
+                    margin-right: 10px;
                 }
             }
         }
@@ -675,7 +708,7 @@ header {
                         height: 397px;
                     }
                 }
-        }
+        }  
         .single-photos-part-two {
             width: 100%;
             padding: 10px 0px;

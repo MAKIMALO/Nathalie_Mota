@@ -421,6 +421,10 @@ header .navbar #closeBtn {
   width: auto !important;
   display: inline-block !important;
 }
+.wpcf7 .wpcf7-form input,
+.wpcf7 .wpcf7-form textarea {
+  padding-left: 6px;
+}
 .wpcf7 .wpcf7-form .wpcf7-submit {
   font-size: 12px;
   border-color: #D8D8D8;
@@ -473,6 +477,7 @@ header .navbar #closeBtn {
   flex-direction: row;
   justify-content: center;
   gap: 2%;
+  padding-top: 30px;
 }
 .single-photos .single-photos-part-one .photo-meta {
   width: 50%;
@@ -481,6 +486,24 @@ header .navbar #closeBtn {
   flex-direction: column;
   padding-top: 390px;
   border-bottom: 1px solid black;
+}
+.single-photos .single-photos-part-one .photo-meta h2 {
+  font-size: clamp(46px, 6vw, 66px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  align-items: center;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.single-photos .single-photos-part-one .photo-meta p {
+  margin: 12px 0px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 .single-photos .single-photos-part-one .photo-image {
   width: 50%;
@@ -537,6 +560,7 @@ header .navbar #closeBtn {
   display: flex;
   align-items: flex-end;
   flex-direction: column;
+  position: relative;
 }
 .single-photos .single-photos-part-two .single-contact-photo .thumbnail-photo img {
   width: 81px;
@@ -546,16 +570,25 @@ header .navbar #closeBtn {
 }
 .single-photos .single-photos-part-two .single-contact-photo .arrows {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  width: 100%;
   cursor: pointer;
-}
-.single-photos .single-photos-part-two .single-contact-photo .arrows :hover {
-  font-weight: bold;
+  padding-top: 10px;
+  padding-left: 10px;
 }
 .single-photos .single-photos-part-two .single-contact-photo .arrows img {
-  margin: 0 10px;
+  transition: transform 0.2s, filter 0.2s;
+}
+.single-photos .single-photos-part-two .single-contact-photo .arrows img:hover {
+  transform: scale(1.5);
+  filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5));
+}
+.single-photos .single-photos-part-two .single-contact-photo .arrows .arrow_right {
+  margin-left: 10px;
+  margin-right: 6px;
+}
+.single-photos .single-photos-part-two .single-contact-photo .arrows .arrow_left {
+  margin-right: 10px;
 }
 .single-photos .single-photos-part-three {
   width: 100%;
