@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="single-photos-part-three">
-            <p>Vous aimerez aussi</p>
+            <h3>Vous aimerez aussi</h3>
             <div class="photos-apparentees">
                 <img src="<?php echo get_template_directory_uri() . '/assets/images/nathalie-12.webp'; ?>" alt="Photo d'un évènement">
                 <img src="<?php echo get_template_directory_uri() . '/assets/images/nathalie-13.webp'; ?>" alt="Photo d'un évènement">
