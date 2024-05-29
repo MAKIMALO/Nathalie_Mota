@@ -1,4 +1,3 @@
-
 <!-- Ajout de la modale de contact -->
 
 <div id="contactModal" class="modale-overlay">
