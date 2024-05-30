@@ -1,4 +1,4 @@
-<!-- Ajout de la modale de contact -->
+<!-- Template de la popup "contact_modale" -->
 
 <div id="contactModal" class="modale-overlay">
     <div class="modale-global">    

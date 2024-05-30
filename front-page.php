@@ -24,11 +24,23 @@
                         <?php if ( has_post_thumbnail() ) {
                             the_post_thumbnail( 'medium' ); // Taille de l'image
                         } ?>
-                        <h2><?php the_title(); ?></h2>
-
                     </a>
-                </div>
-            <?php endwhile;
+                                <!-- Récupération et affichage des images associées -->
+                                <?php
+                $related_images = get_field('images_associees'); // Supposons que les images associées sont stockées dans un champ personnalisé ACF nommé 'images_associees'
+
+                if ($related_images) {
+                    foreach ($related_images as $image) {
+                        $image_url = $image['url'];
+                        $image_alt = $image['alt'];
+
+                        // Inclure le template photo_block.php pour chaque image associée
+                        include('template_parts/photo_block.php');
+                    }
+                }
+                ?>
+            </div>
+        <?php endwhile;
         else : ?>
             <p>No photos found</p>
         <?php endif;

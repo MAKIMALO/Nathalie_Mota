@@ -16,7 +16,12 @@
 
         // Enqueue script
         wp_enqueue_script( 'script', get_template_directory_uri() . '/js/script.js', array(), '1.2', true );
-    }    
+    }
+    
+    add_action( 'wp_enqueue_scripts', 'enqueue_font_awesome' );
+    function enqueue_font_awesome() {
+    wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css' );
+    }
     
 
 // Ajout de l'onglet "Menus" sur le dashboard dans WP - dossier "Apparence" 

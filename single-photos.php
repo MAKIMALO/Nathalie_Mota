@@ -59,8 +59,38 @@
         <div class="single-photos-part-three">
             <h3>Vous aimerez aussi</h3>
             <div class="photos-apparentees">
-                <img src="<?php echo get_template_directory_uri() . '/assets/images/nathalie-12.webp'; ?>" alt="Photo d'un évènement">
-                <img src="<?php echo get_template_directory_uri() . '/assets/images/nathalie-13.webp'; ?>" alt="Photo d'un évènement">
+            <?php 
+                $terms = get_the_terms( $post->ID, 'categorie' );
+
+                if ( $terms && ! is_wp_error( $terms ) ) {
+                    $term_slugs = array();
+                    foreach ( $terms as $term ) {
+                        $term_slugs[] = $term->slug;
+                    }    
+                    $args = array(
+                        'post_type' => 'photos',
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'categorie',
+                                'field' => 'slug',
+                                'terms' => $term_slugs,
+                            ),
+                        ),
+                        'posts_per_page' => 2,
+                    );
+
+                    $my_query = new WP_Query( $args );
+
+                    if( $my_query->have_posts() ) : while( $my_query->have_posts() ) : $my_query->the_post();
+                        $image_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+                        $image_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
+                        include (get_template_directory() . '/template-parts/photo_block.php');
+                    endwhile;
+                    endif;
+
+                    wp_reset_postdata();
+                }
+            ?>
             </div>
         </div>
     <?php endwhile; endif; ?>
