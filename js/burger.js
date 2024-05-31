@@ -34,7 +34,9 @@ function checkWindowSize() {
         closeBtn.style.display = 'none'; // Cacher le bouton croix
         topnav.style.display = 'flex'; // Afficher le menu
     } else {
-        closeMenu(); // S'assurer que le menu est fermé par défaut
+        openBtn.style.display = 'block'; // Afficher le bouton hamburger
+        closeBtn.style.display = 'none'; // Cacher le bouton croix
+        topnav.style.display = 'none'; // Cacher le menu
     }
 }
 
