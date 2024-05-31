@@ -84,6 +84,7 @@
                     if( $my_query->have_posts() ) : while( $my_query->have_posts() ) : $my_query->the_post();
                         $image_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
                         $image_alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
+                        $post_id = get_the_ID();
                         include (get_template_directory() . '/template-parts/photo_block.php');
                     endwhile;
                     endif;
