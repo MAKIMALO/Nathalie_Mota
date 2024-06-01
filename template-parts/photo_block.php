@@ -27,11 +27,12 @@ if ( !$reference ) {
             <img class="img_icon_fullscreen" src="<?php echo get_template_directory_uri() . '/assets/images/icon_fullscreen.webp'; ?>" alt="Image d'un icône plein écran">
         </div>    
         <div id="photo_icon_eye">
-            <img class="img_icon_eye" src="<?php echo get_template_directory_uri() . '/assets/images/icon_eye.webp'; ?>" alt="Image d'un icône oeil">
+            <a href="<?php echo get_permalink( $post_id ); ?>">
+                <img class="img_icon_eye" src="<?php echo get_template_directory_uri() . '/assets/images/icon_eye.webp'; ?>" alt="Image d'un icône oeil">
         </div>
         <div id="photo-info__details">
-            <p><?php echo esc_html( $reference ); ?></p>
-            <p><?php echo esc_html( $category ); ?></p>
+            <p class="photo_block_reference"><?php echo esc_html( $reference ); ?></p>
+            <p class="photo_block_categorie"><?php echo esc_html( $category ); ?></p>
         </div>
     </div>
 </div>

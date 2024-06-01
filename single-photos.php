@@ -60,6 +60,7 @@
             <h3>Vous aimerez aussi</h3>
             <div class="photos-apparentees">
             <?php 
+                $main_photo_id = get_the_ID();
                 $terms = get_the_terms( $post->ID, 'categorie' );
 
                 if ( $terms && ! is_wp_error( $terms ) ) {
@@ -77,6 +78,7 @@
                             ),
                         ),
                         'posts_per_page' => 2,
+                        'post__not_in' => array($main_photo_id),
                     );
 
                     $my_query = new WP_Query( $args );
