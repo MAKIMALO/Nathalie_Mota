@@ -1,6 +1,6 @@
-console.log("le fichier burger.js fonctionne");
+console.log("Le fichier burger.js fonctionne");
 
-const topnav = document.querySelector(".header_site_menu");
+const topnav = document.getElementById("header_site_menu");
 const openBtn = document.getElementById("openBtn");
 const closeBtn = document.getElementById("closeBtn");
 
@@ -12,10 +12,17 @@ function openMenu() {
 }
 
 function closeMenu() {
-    topnav.classList.remove('active');
-    openBtn.style.display = 'block'; // Afficher le bouton hamburger
-    closeBtn.style.display = 'none'; // Cacher le bouton croix
-    topnav.style.display = 'none'; // Cacher le menu
+    const topnav = document.getElementById("header_site_menu");
+    if (topnav) {
+        topnav.classList.remove('active');
+        const openBtn = document.getElementById("openBtn");
+        const closeBtn = document.getElementById("closeBtn");
+        if (openBtn && closeBtn) {
+            openBtn.style.display = 'block'; // Afficher le bouton hamburger
+            closeBtn.style.display = 'none'; // Cacher le bouton croix
+        }
+        topnav.style.display = 'none'; // Cacher le menu
+    }
 }
 
 openBtn.addEventListener('click', (e) => {
@@ -29,16 +36,19 @@ closeBtn.addEventListener('click', (e) => {
 });
 
 function checkWindowSize() {
-    if (window.innerWidth > 375) {
-        openBtn.style.display = 'none'; // Cacher le bouton hamburger
-        closeBtn.style.display = 'none'; // Cacher le bouton croix
-        topnav.style.display = 'flex'; // Afficher le menu
-    } else {
+    if (window.innerWidth <= 375) {
         openBtn.style.display = 'block'; // Afficher le bouton hamburger
         closeBtn.style.display = 'none'; // Cacher le bouton croix
         topnav.style.display = 'none'; // Cacher le menu
+    } else {
+        openBtn.style.display = 'none'; // Cacher le bouton hamburger
+        closeBtn.style.display = 'none'; // Cacher le bouton croix
+        topnav.style.display = 'flex'; // Afficher le menu
     }
 }
 
 window.addEventListener('resize', checkWindowSize);
-document.addEventListener('DOMContentLoaded', checkWindowSize);
+document.addEventListener('DOMContentLoaded', () => {
+    closeMenu(); // Fermer le menu au chargement de la page
+    checkWindowSize();
+});

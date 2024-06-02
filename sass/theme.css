@@ -58,23 +58,27 @@ header {
   justify-content: center;
   align-items: center;
 }
-header .navbar {
+
+.navbar {
   display: flex;
   flex-direction: row;
   width: 90%;
   justify-content: space-between;
   align-items: center;
 }
-header .navbar .logo img {
+
+.logo img {
   width: 216px;
   height: 14px;
 }
-header .navbar .header-site-menu {
+
+#header-site-menu {
   width: 100vw;
   display: flex;
 }
-header .navbar #openBtn,
-header .navbar #closeBtn {
+
+#openBtn,
+#closeBtn {
   cursor: pointer;
   position: absolute;
   margin-top: 4px;
@@ -91,12 +95,15 @@ header .navbar #closeBtn {
   font-size: 16px;
   padding-left: 0px;
 }
+
 #menu-header > li {
   list-style-type: none;
 }
-#menu-header > li :hover {
+
+#menu-header > li:hover {
   font-weight: bold;
 }
+
 #menu-header > li > a {
   text-decoration: none;
   color: black;
@@ -107,21 +114,16 @@ header .navbar #closeBtn {
     gap: 30px;
     font-size: calc(0.5rem + 1vw);
   }
-  header .navbar .logo img {
+  .logo img {
     width: 200px;
     height: 13px;
-  }
-}
-@media (max-width: 600px) {
-  #menu-header {
-    gap: 20px;
   }
 }
 @media (max-width: 560px) {
   #menu-header {
     gap: 16px;
   }
-  header .navbar .logo img {
+  .logo img {
     width: 184px;
     height: 12px;
   }
@@ -130,7 +132,7 @@ header .navbar #closeBtn {
   #menu-header {
     gap: 12px;
   }
-  header .navbar .logo img {
+  .logo img {
     width: 168px;
     height: 11px;
   }
@@ -139,7 +141,7 @@ header .navbar #closeBtn {
   #menu-header {
     gap: 11px;
   }
-  header .navbar .logo img {
+  .logo img {
     width: 152px;
     height: 11px;
   }
@@ -148,7 +150,7 @@ header .navbar #closeBtn {
   #menu-header {
     gap: 8px;
   }
-  header .navbar .logo img {
+  .logo img {
     width: 138px;
     height: 10px;
   }
@@ -157,32 +159,32 @@ header .navbar #closeBtn {
   #menu-header {
     gap: 6px;
   }
-  header .navbar .logo img {
+  .logo img {
     width: 138px;
     height: 9px;
   }
 }
 @media (max-width: 375px) {
-  header .navbar .logo img {
+  .logo img {
     width: 138px;
     height: 9px;
   }
-  header .navbar #openBtn {
+  #openBtn {
     display: block;
   }
-  .header-site-menu {
+  #header-site-menu {
     display: none;
   }
-  .header-site-menu.active {
+  #header-site-menu.active {
     display: block;
   }
   #closeBtn {
     display: none;
   }
-  .header-site-menu.active ~ #closeBtn {
+  #header-site-menu.active ~ #closeBtn {
     display: block;
   }
-  .header-site-menu.active ~ #openBtn {
+  #header-site-menu.active ~ #openBtn {
     display: none;
   }
   #menu-header {

@@ -76,29 +76,33 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    .navbar {
-        display: flex;
-        flex-direction: row;
-        width: 90%;
-        justify-content: space-between;
-        align-items: center;
-        .logo img {
-            width: 216px;
-            height: 14px;
-        }
-        .header-site-menu {
-            width: 100vw;
-            display: flex;
-        }
-        #openBtn,
-        #closeBtn {
-            cursor: pointer;
-            position: absolute;
-            margin-top: 4px;
-            left: 87%;
-            display: none;
-    }
-    }
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    width: 216px;
+    height: 14px;
+}
+
+#header-site-menu {
+    width: 100vw;
+    display: flex;
+}
+
+#openBtn,
+#closeBtn {
+    cursor: pointer;
+    position: absolute;
+    margin-top: 4px;
+    left: 87%;
+    display: none;
 }
 
 #menu-header {
@@ -109,118 +113,103 @@ header {
     gap: 50px;
     font-size: 16px;
     padding-left: 0px;
-    > li {
-        list-style-type: none;
-        :hover {
-            font-weight: bold;
-        }
-        > a {
-            text-decoration: none;
-            color: black;
-        }
-    }
+}
+
+#menu-header > li {
+    list-style-type: none;
+}
+
+#menu-header > li:hover {
+    font-weight: bold;
+}
+
+#menu-header > li > a {
+    text-decoration: none;
+    color: black;
 }
 
 @media (max-width: 700px) {
     #menu-header {
         gap: 30px;
         font-size: calc(0.5rem + 1vw);
-        }
-
-    header .navbar {
-        .logo img {
-            width: 200px;
-            height: 13px;
-        }
     }
-}
 
-@media (max-width: 600px) {
-    #menu-header {
-        gap: 20px;
-        }
+    .logo img {
+        width: 200px;
+        height: 13px;
+    }
 }
 
 @media (max-width: 560px) {
     #menu-header {
         gap: 16px;
-        }
+    }
 
-    header .navbar {
-        .logo img {
-            width: 184px;
-            height: 12px;
-        }
+    .logo img {
+        width: 184px;
+        height: 12px;
     }
 }
 
 @media (max-width: 500px) {
     #menu-header {
         gap: 12px;
-        }
+    }
 
-    header .navbar {
-        .logo img {
-            width: 168px;
-            height: 11px;
-        }
+    .logo img {
+        width: 168px;
+        height: 11px;
     }
 }
 
 @media (max-width: 470px) {
     #menu-header {
         gap: 11px;
-        }
+    }
 
-    header .navbar {
-        .logo img {
-            width: 152px;
-            height: 11px;
-        }
+    .logo img {
+        width: 152px;
+        height: 11px;
     }
 }
 
 @media (max-width: 430px) {
     #menu-header {
         gap: 8px;
-        }
-    
-        header .navbar {
-            .logo img {
-                width: 138px;
-                height: 10px;
-            }
-        }
+    }
+
+    .logo img {
+        width: 138px;
+        height: 10px;
+    }
 }
 
 @media (max-width: 390px) {
     #menu-header {
         gap: 6px;
-        }
-    
-        header .navbar {
-            .logo img {
-                width: 138px;
-                height: 9px;
-            }
-        }
+    }
+
+    .logo img {
+        width: 138px;
+        height: 9px;
+    }
 }
 
 @media (max-width: 375px) {
-    header .navbar {
-        .logo img {
-            width: 138px;
-            height: 9px;
-        }
-        #openBtn {
-            display: block;
-        }
+    .logo img {
+        width: 138px;
+        height: 9px;
     }
-    .header-site-menu {
+
+    #openBtn {
+        display: block;
+    }
+
+    #header-site-menu {
         display: none;
     }
 
-    .header-site-menu.active {
+    #header-site-menu.active {
         display: block;
     }
 
@@ -228,11 +217,11 @@ header {
         display: none;
     }
 
-    .header-site-menu.active ~ #closeBtn {
+    #header-site-menu.active ~ #closeBtn {
         display: block;
     }
 
-    .header-site-menu.active ~ #openBtn {
+    #header-site-menu.active ~ #openBtn {
         display: none;
     }
 
@@ -249,9 +238,10 @@ header {
         justify-content: center;
         background-color: $primary-color;
         font-size: 44px;
-        > li > a {
-            color: white;
-        }
+    }
+
+    #menu-header > li > a {
+        color: white;
     }
 }
 

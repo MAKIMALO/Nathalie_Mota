@@ -23,7 +23,7 @@ if ( !$reference ) {
 <div id="photo-block">
     <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" id="photo-block__img">
     <div id="photo-block-survol">
-        <div id="photo_icon_fullscreen">
+        <div id="photo_icon_fullscreen" data-fullscreen-url="<?php echo esc_url( $image_url ); ?>">
             <img class="img_icon_fullscreen" src="<?php echo get_template_directory_uri() . '/assets/images/icon_fullscreen.webp'; ?>" alt="Image d'un icône plein écran">
         </div>    
         <div id="photo_icon_eye">
