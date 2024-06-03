@@ -633,10 +633,15 @@ header {
             align-items: flex-end;
             flex-direction: column;
             position: relative;
-            .thumbnail-photo img {
+            .thumbnail-photo {
                 width: 81px;
                 height: 71px;
-                object-fit: cover;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                }
             }
             .arrows {
                 display: flex;

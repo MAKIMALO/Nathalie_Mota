@@ -578,9 +578,14 @@ header {
   flex-direction: column;
   position: relative;
 }
-.single-photos .single-photos-part-two .single-contact-photo .thumbnail-photo img {
+.single-photos .single-photos-part-two .single-contact-photo .thumbnail-photo {
   width: 81px;
   height: 71px;
+  overflow: hidden;
+}
+.single-photos .single-photos-part-two .single-contact-photo .thumbnail-photo img {
+  width: 100%;
+  height: auto;
   -o-object-fit: cover;
      object-fit: cover;
 }
