@@ -1,46 +1,40 @@
 <?php get_header(); ?>
 
 <?php
-$main_photo_date = get_the_time('Y-m-d');
-
-$prev_post_args = array(
+// Effectuer une requête pour obtenir toutes les photos
+$all_photos_args = array(
     'post_type' => 'photos',
-    'posts_per_page' => 1,
-    'date_query' => array(
-        'before' => $main_photo_date,
-    ),
+    'posts_per_page' => -1,
     'orderby' => 'date',
-    'order' => 'DESC',
+    'order' => 'DESC'
+    // Autres arguments de requête si nécessaire
 );
+$all_photos_query = new WP_Query($all_photos_args);
 
-$next_post_args = array(
-    'post_type' => 'photos',
-    'posts_per_page' => 1,
-    'date_query' => array(
-        'after' => $main_photo_date,
-    ),
-    'orderby' => 'date',
-    'order' => 'ASC',
-);
-
-$prev_post_query = new WP_Query($prev_post_args);
-$next_post_query = new WP_Query($next_post_args);
-
-$prev_post = $prev_post_query->posts ? $prev_post_query->posts[0] : null;
-$next_post = $next_post_query->posts ? $next_post_query->posts[0] : null;
-
-$prev_image_url = $prev_post ? get_the_post_thumbnail_url($prev_post->ID, 'medium') : '';
-$next_image_url = $next_post ? get_the_post_thumbnail_url($next_post->ID, 'medium') : '';
+// Vérifier si la requête a réussi
+if ($all_photos_query->have_posts()) {
+    // Récupérer les URLs des miniatures de toutes les photos
+    $all_images = array();
+    foreach ($all_photos_query->posts as $photo) {
+        $image_url = get_the_post_thumbnail_url($photo->ID, 'medium');
+        if ($image_url) {
+            $all_images[] = array(
+                'url' => $image_url,
+                'link' => get_permalink($photo->ID)
+            );
+        }
+    }
+}
 ?>
 
 <section class="single-photos">
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-            <?php
-            $prev_post = get_previous_post();
-            $next_post = get_next_post();
-            $prev_image_url = $prev_post ? get_the_post_thumbnail_url($prev_post->ID, 'medium') : '';
-            $next_image_url = $next_post ? get_the_post_thumbnail_url($next_post->ID, 'medium') : '';
-            ?>
+        <?php
+        $prev_post = get_previous_post();
+        $next_post = get_next_post();
+        $prev_image_url = $prev_post ? get_the_post_thumbnail_url($prev_post->ID, 'medium') : '';
+        $next_image_url = $next_post ? get_the_post_thumbnail_url($next_post->ID, 'medium') : '';
+        ?>
             <div class="single-photos-part-one">
                 <div class="photo-meta">
                     <?php $titre = get_the_title();
@@ -146,11 +140,7 @@ endif; ?>
 
 <?php get_footer(); ?>
 
-<script>
-    var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
-    var getPreviousPhotosUrl = '<?php echo admin_url('admin-ajax.php?action=get_previous_photos'); ?>';
-    var getNextPhotosUrl = '<?php echo admin_url('admin-ajax.php?action=get_next_photos'); ?>';
-</script>
+
 <script src="<?php echo get_template_directory_uri(); ?>/js/script.js" type="text/javascript"></script>
 </body>
 
