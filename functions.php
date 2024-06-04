@@ -87,39 +87,4 @@ function change_photo_slug_structure($args, $post_type) {
 add_filter('register_post_type_args', 'change_photo_slug_structure', 10, 2);
 
 
-// Récupération des données JSON des photos de WP (utilisation sur le fichier single-photos.php pour l'affichage des miniatures aux flèches)
-function get_photo_data_for_js() {
-    $args = array(
-        'post_type' => 'photos',
-        'posts_per_page' => -1,
-        'orderby' => 'date',
-        'order' => 'ASC'
-    );
-
-    $photos = get_posts($args);
-
-    $photo_data = array();
-
-    foreach ($photos as $photo) {
-        $thumbnail_url = get_the_post_thumbnail_url($photo->ID);
-
-        $photo_data[] = array(
-            'id' => $photo->ID,
-            'thumbnail_url' => $thumbnail_url,
-        );
-    }
-
-    return $photo_data;
-}
-
-// Localisation du script JavaScript avec les données des photos
-function localize_photo_data_script() {
-    // Récupérer les données des photos
-    $photo_data = get_photo_data_for_js();
-
-    // Localiser le script JavaScript et y transmettre les données
-    wp_localize_script( 'script', 'photoData', $photo_data );
-}
-add_action( 'wp_enqueue_scripts', 'localize_photo_data_script' );
-
 ?>

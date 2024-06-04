@@ -1,6 +1,6 @@
 console.log("Le fichier burger.js fonctionne");
 
-const topnav = document.getElementById("header_site_menu");
+const topnav = document.getElementById("header_menu");
 const openBtn = document.getElementById("openBtn");
 const closeBtn = document.getElementById("closeBtn");
 
@@ -12,7 +12,7 @@ function openMenu() {
 }
 
 function closeMenu() {
-    const topnav = document.getElementById("header_site_menu");
+    const topnav = document.getElementById("header_menu");
     if (topnav) {
         topnav.classList.remove('active');
         const openBtn = document.getElementById("openBtn");

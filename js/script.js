@@ -21,10 +21,10 @@ jQuery(document).ready(function($) {
 
     // Gestion du clic pour ouvrir la photo en grand
     $('.arrow_left, .arrow_right').click(function(event) {
-        event.preventDefault(); // Empêche le comportement par défaut du lien
+        event.preventDefault();
         var url = $(this).attr('href');
         if (url !== '#') {
-            window.location.href = url; // Redirige vers la page correspondante
+            window.location.href = url;
         }
     });
 });
