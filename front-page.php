@@ -24,12 +24,10 @@
         <div class="photos-gallery">
         <?php
             $per_page = 8;
-            $offset = -1;
 
             $args = array(
                 'post_type' => 'photos',
                 'posts_per_page' => 8,
-                'offset' => $offset,
             );
             $query = new WP_Query( $args );
 
@@ -45,13 +43,14 @@
             ?>
         </div>
         <div class="load-more-photos">
-            <button class="load_more" href="<?php echo home_url( '?page=' . $offset + $per_page ); ?>">Chargez plus</button>
+            <button class="load_more">Charger plus</button>
         </div>
     </section>
 
 </main>
 
 <?php get_footer(); ?>
+
 
 </body>
 </html>

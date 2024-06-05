@@ -1,5 +1,6 @@
-console.log("le fichier script.js fonctionne");
+console.log("le fichier arrows_miniature.js fonctionne");
 
+// Animations des flèches sous la photo miniature sur le fichier single-photos.php
 jQuery(document).ready(function($) {
     console.log("jQuery est prêt");
 

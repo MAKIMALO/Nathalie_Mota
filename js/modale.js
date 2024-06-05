@@ -1,5 +1,6 @@
 console.log("le fichier modale.js fonctionne");
 
+// Ouverture et fermeture de la modale de contact
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById('contactModal');
     var links = document.querySelectorAll('.contactLink');

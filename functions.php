@@ -20,8 +20,15 @@
         // Enqueue jquery script
 	    wp_enqueue_script( 'jquery-script', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js', array('jquery'), '1.0', true);
 
-        // Enqueue custom script
-        wp_enqueue_script( 'custom-script', get_template_directory_uri() . '/js/script.js', array('jquery'), '1.2', true );
+        // Enqueue arrows_miniature script
+        wp_enqueue_script( 'arrows_miniature-script', get_template_directory_uri() . '/js/arrows_miniature.js', array('jquery'), '1.2', true );
+
+        // Enqueue load_more_button script
+        wp_enqueue_script( 'load_more_button-script', get_template_directory_uri() . '/js/load_more_button.js', array('jquery'), '1.2', true );
+        
+         // Localize the load_more_button script with ajax URL
+        wp_localize_script('load_more_button-script', 'ajax_params', array('ajax_url' => admin_url('admin-ajax.php')
+        ));
     }
     
 
@@ -86,5 +93,36 @@ function change_photo_slug_structure($args, $post_type) {
 }
 add_filter('register_post_type_args', 'change_photo_slug_structure', 10, 2);
 
+
+// Ajout de la fonction "load_more_photos" pour traiter la requête Ajax sur le bouton "load_more" de la page "front_page.php"
+function load_more_photos() {
+    $page = intval($_POST['page']);
+    $per_page = intval($_POST['per_page']);
+    $loaded_photos = isset($_POST['loaded_photos']) ? array_map('intval', $_POST['loaded_photos']) : array();
+
+    $args = array(
+        'post_type' => 'photos',
+        'posts_per_page' => $per_page,
+        'paged' => $page,
+        'post__not_in' => $loaded_photos, // Exclure les photos déjà chargées
+    );
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) :
+        while ($query->have_posts()) : $query->the_post();
+            $image_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
+            $image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
+            $post_id = get_the_ID();
+            include(get_template_directory() . '/template-parts/photo_block.php');
+        endwhile;
+        wp_reset_postdata();
+    endif;
+
+    wp_die(); // This is required to terminate immediately and return a proper response
+}
+
+add_action('wp_ajax_load_more_photos', 'load_more_photos');
+add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
 
 ?>
