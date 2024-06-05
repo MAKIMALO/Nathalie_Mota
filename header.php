@@ -6,6 +6,14 @@
     <title>Nathalie Mota : photographe professionnelle dans l'événementiel</title>
     <meta name="description" content="En tant que photographe professionnelle, Nathalie Mota vous propose des prestations de qualité pour tous vos événements" />
     <?php wp_head(); ?>
+    <?php
+    // Récupérer le nombre total de photos dans le CPT "photos"
+    $total_photos = wp_count_posts('photos')->publish;
+    ?>
+    <script>
+        // Définir la variable JavaScript pour le nombre total de photos
+        var totalPhotos = <?php echo $total_photos; ?>;
+    </script>
 </head>
 
 <body>

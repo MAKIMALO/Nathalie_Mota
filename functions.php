@@ -98,25 +98,25 @@ add_filter('register_post_type_args', 'change_photo_slug_structure', 10, 2);
 function load_more_photos() {
     $page = intval($_POST['page']);
     $per_page = intval($_POST['per_page']);
-    $loaded_photos = isset($_POST['loaded_photos']) ? array_map('intval', $_POST['loaded_photos']) : array();
 
     $args = array(
         'post_type' => 'photos',
         'posts_per_page' => $per_page,
         'paged' => $page,
-        'post__not_in' => $loaded_photos, // Exclure les photos déjà chargées
     );
 
     $query = new WP_Query($args);
 
     if ($query->have_posts()) :
         while ($query->have_posts()) : $query->the_post();
-            $image_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
-            $image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
             $post_id = get_the_ID();
+            $image_url = get_the_post_thumbnail_url($post_id, 'large');
+            $image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
             include(get_template_directory() . '/template-parts/photo_block.php');
         endwhile;
         wp_reset_postdata();
+    else:
+        echo ''; // Envoyer une réponse vide s'il n'y a plus de photos
     endif;
 
     wp_die(); // This is required to terminate immediately and return a proper response

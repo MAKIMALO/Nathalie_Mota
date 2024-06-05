@@ -4,23 +4,12 @@ console.log("le fichier load_more_button.js fonctionne");
 jQuery(document).ready(function($) {
     var page = 1;
     var per_page = 8;
-    var loadedPhotos = [];
+    var total_photos_loaded = 0; // Variable pour suivre le nombre total de photos déjà chargées
     var isLoading = false;
-
-
-    // Initialiser loadedPhotos avec les IDs des photos déjà chargées
-    $('.photos-gallery .photo-block').each(function() {
-        var photoId = $(this).data('photo-id');
-        if (photoId) {
-            loadedPhotos.push(photoId);
-        }
-    });
-
-    console.log('Initial loaded photos:', loadedPhotos);
 
     $('.load_more').click(function(e) {
         e.preventDefault();  // Empêche le comportement par défaut du bouton
-        if (isLoading) return;
+        if (isLoading || total_photos_loaded >= totalPhotos) return; // Arrêtez si toutes les photos sont déjà chargées
         isLoading = true;
 
         page++;
@@ -28,24 +17,26 @@ jQuery(document).ready(function($) {
             action: 'load_more_photos',
             page: page,
             per_page: per_page,
-            loaded_photos: loadedPhotos
+            loaded_photos: [...$('.photo-item').map(function() { return $(this).data('photo-id'); })] // Obtenez les IDs de toutes les photos déjà chargées
         };
 
+        console.log('Data sent:', data);
+
         $.post(ajax_params.ajax_url, data, function(response) {
+            console.log('Response:', response);
             if (response) {
                 var $response = $(response);
-                // Ajouter les nouvelles photos et mettre à jour loadedPhotos
-                $response.each(function() {
-                    var photoId = $(this).data('photo-id');
-                    console.log('Loaded photo ID:', photoId); // Log photo ID
-                    if (photoId && $.inArray(photoId, loadedPhotos) === -1) {
-                        loadedPhotos.push(photoId);
-                        $('.photos-gallery').append($(this));
-                    }
-                });
-                console.log('Updated loaded photos:', loadedPhotos);
+                console.log('Number of new photos:', $response.length);
+                $('.photos-gallery').append($response);
+
+                // Ajoutez le nombre de nouvelles photos chargées au nombre total de photos déjà chargées
+                total_photos_loaded += $response.length;
+
+                if (total_photos_loaded >= totalPhotos) {
+                    $('.load_more').hide(); // Cacher le bouton si toutes les photos sont déjà chargées
+                }
             } else {
-                $('.load_more').hide();
+                $('.load_more').hide(); // Cacher le bouton si la réponse est vide
             }
             isLoading = false;
         });
