@@ -116,10 +116,10 @@ function load_more_photos() {
         endwhile;
         wp_reset_postdata();
     else:
-        echo ''; // Envoyer une réponse vide s'il n'y a plus de photos
+        echo '';
     endif;
 
-    wp_die(); // This is required to terminate immediately and return a proper response
+    wp_die();
 }
 
 add_action('wp_ajax_load_more_photos', 'load_more_photos');

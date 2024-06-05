@@ -8,7 +8,7 @@ jQuery(document).ready(function($) {
     var isLoading = false;
 
     $('.load_more').click(function(e) {
-        e.preventDefault();  // Empêche le comportement par défaut du bouton
+        e.preventDefault();
         if (isLoading || total_photos_loaded >= totalPhotos) return; // Arrêtez si toutes les photos sont déjà chargées
         isLoading = true;
 
