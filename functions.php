@@ -30,6 +30,18 @@
         wp_localize_script('load_more_button-script', 'ajax_params', array('ajax_url' => admin_url('admin-ajax.php')
         ));
     }
+
+    add_action('wp_enqueue_scripts', 'enqueue_select2');
+    function enqueue_select2() {
+        // CSS de Select2
+        wp_enqueue_style('select2-css', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css');
+        
+        // JS de Select2
+        wp_enqueue_script('select2-js', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array('jquery'), null, true);
+        
+        // Enqueue filters script pour initialiser Select2 et gérer les filtres AJAX
+        wp_enqueue_script('filters-js', get_template_directory_uri() . '/js/filters.js', array('jquery', 'select2-js'), null, true);
+    }
     
 
 // Ajout de l'onglet "Menus" sur le dashboard dans WP - dossier "Apparence" 
@@ -124,5 +136,59 @@ function load_more_photos() {
 
 add_action('wp_ajax_load_more_photos', 'load_more_photos');
 add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
+
+
+// Ajout de la fonction "filters_photos" pour traiter la requête Ajax sur les filtres de la page "front_page.php"
+function filter_photos() {
+    $category = isset($_POST['category']) ? intval($_POST['category']) : '';
+    $format = isset($_POST['format']) ? intval($_POST['format']) : '';
+    $date_order = isset($_POST['date_order']) ? sanitize_text_field($_POST['date_order']) : 'DESC';
+
+    $args = array(
+        'post_type' => 'photos',
+        'posts_per_page' => 8,
+        'order' => $date_order,
+    );
+
+    $tax_query = array('relation' => 'AND');
+
+    if ($category) {
+        $tax_query[] = array(
+            'taxonomy' => 'category',
+            'field' => 'term_id',
+            'terms' => $category,
+        );
+    }
+
+    if ($format) {
+        $tax_query[] = array(
+            'taxonomy' => 'format',
+            'field' => 'term_id',
+            'terms' => $format,
+        );
+    }
+
+    if (!empty($tax_query)) {
+        $args['tax_query'] = $tax_query;
+    }
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) :
+        while ($query->have_posts()) : $query->the_post();
+            $image_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
+            $image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
+            $post_id = get_the_ID();
+            include(get_template_directory() . '/template-parts/photo_block.php');
+        endwhile;
+        wp_reset_postdata();
+    else :
+        echo '<p>Aucune photo trouvée.</p>';
+    endif;
+
+    die();
+}
+add_action('wp_ajax_filter_photos', 'filter_photos');
+add_action('wp_ajax_nopriv_filter_photos', 'filter_photos');
 
 ?>
