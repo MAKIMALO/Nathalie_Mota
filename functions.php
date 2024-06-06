@@ -154,7 +154,7 @@ function filter_photos() {
 
     if ($category) {
         $tax_query[] = array(
-            'taxonomy' => 'category',
+            'taxonomy' => 'categorie', // Utilisez le slug correct de votre taxonomy
             'field' => 'term_id',
             'terms' => $category,
         );

@@ -20,51 +20,60 @@
     </section>
     
     <!-- Affichage des filtres -->
-    <section id="filter">
-        <form id="filter-form">
-            <!-- Formulaire 1: Catégories -->
-            <div class="filter-group">
-                <label for="category-filter">Catégories :</label>
+    <section class="section-filter">
+        <form class="filter-form">
+            <div class="filter-group-1">
+                <!-- Formulaire 1: Catégories -->
+                <div class="filter-group">
                     <?php
-                    $categories = get_categories();
+                    $categories = get_terms(array(
+                        'taxonomy' => 'categorie', // Utilisez le slug correct de votre taxonomy
+                        'hide_empty' => false,
+                    ));
                     ?>
-                <select id="category-filter" name="category" placeholder="Sélectionner une catégorie">
-                    <option></option> <!-- Option vide -->
-                    <?php foreach ($categories as $category) : ?>
-                        <option value="<?= $category->term_id; ?>"><?= $category->name; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
+                    <label for="category-filter" class="visually-hidden">Catégories</label>
+                    <select id="category-filter" name="category" placeholder="Catégorie">
+                        <option></option> <!-- Option vide -->
+                        <?php if (!empty($categories) && !is_wp_error($categories)) : ?>
+                            <?php foreach ($categories as $category) : ?>
+                                <option value="<?= $category->term_id; ?>"><?= $category->name; ?></option>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </select>
+                </div>
 
-            <!-- Formulaire 2: Formats -->
-            <div class="filter-group">
-                <label for="format-filter">Formats :</label>
+                <!-- Formulaire 2: Formats -->
+                <div class="filter-group">
                     <?php
                     $formats = get_terms(array(
                         'taxonomy' => 'format',
                         'hide_empty' => false,
                     ));
                     ?>
-                <select id="format-filter" name="format" placeholder="Sélectionner un format">
-                    <option></option> <!-- Option vide -->
-                    <?php foreach ($formats as $format) : ?>
-                        <option value="<?= $format->term_id; ?>"><?= $format->name; ?></option>
-                    <?php endforeach; ?>
-                </select>
+                    <label for="format-filter" class="visually-hidden">Format</label>
+                    <select id="format-filter" name="format" placeholder="Format">
+                        <option></option> <!-- Option vide -->
+                        <?php if (!empty($formats) && !is_wp_error($formats)) : ?>
+                            <?php foreach ($formats as $format) : ?>
+                                <option value="<?= $format->term_id; ?>"><?= $format->name; ?></option>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </select>
+                </div>
             </div>
-
-            <!-- Formulaire 3: Tri par date -->
-            <div class="filter-group">
-                <label for="date-filter">Trier par date :</label>
-                <select id="date-filter" name="date_order" placeholder="Sélectionner un ordre">
-                    <option></option> <!-- Option vide -->
-                    <option value="DESC">Les plus récentes</option>
-                    <option value="ASC">Les plus anciennes</option>
-                </select>
+            <div class="filter-group-2">
+                <!-- Formulaire 3: Tri par date -->
+                <div class="filter-group">
+                    <label for="date-filter" class="visually-hidden">Trier par</label>
+                    <select id="date-filter" name="date_order" placeholder="Trier par">
+                        <option></option> <!-- Option vide -->
+                        <option value="DESC">Les plus récentes</option>
+                        <option value="ASC">Les plus anciennes</option>
+                    </select>
+                </div>
             </div>
         </form>
     </section>
-
     <!-- Affichage de l'ensemble des pages "photos" -->
     <section class="section-gallery">
         <div class="photos-gallery">
