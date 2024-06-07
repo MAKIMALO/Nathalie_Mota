@@ -1,37 +1,40 @@
 console.log("le fichier filters.js fonctionne");
 
-jQuery(document).ready(function($) {
-    // Fonction pour obtenir le label correspondant à l'élément de sélection
-    function getPlaceholder(labelFor) {
-        return $('label[for="' + labelFor + '"]').text();
+// Change option selected
+const labels = document.querySelectorAll('.dropdown__filter-selected');
+const options = document.querySelectorAll('.dropdown__select-option');
+
+options.forEach((option) => {
+    option.addEventListener('click', () => {
+        const label = option.closest('.dropdown').querySelector('.dropdown__filter-selected');
+        label.textContent = option.textContent;
+        label.dataset.value = option.dataset.value;
+
+        // Trigger a change event
+        const event = new Event('change');
+        label.dispatchEvent(event);
+    });
+});
+
+// Close dropdown onclick outside
+document.addEventListener('click', (e) => {
+    const toggles = document.querySelectorAll('.dropdown__switch');
+    const element = e.target;
+
+    if (Array.from(toggles).includes(element)) return;
+
+    const isDropdownChild = element.closest('.dropdown__filter');
+    
+    if (!isDropdownChild) {
+        toggles.forEach(toggle => toggle.checked = false);
     }
+});
 
-    // Test de la fonction getPlaceholder
-    console.log("Placeholder pour #category-filter :", getPlaceholder('category-filter'));
-    console.log("Placeholder pour #format-filter :", getPlaceholder('format-filter'));
-    console.log("Placeholder pour #date-filter :", getPlaceholder('date-filter'));
-
-    // Initialiser Select2 sur les éléments de sélection avec les placeholders dynamiques
-    $('#category-filter').select2({
-        placeholder: getPlaceholder('category-filter'),
-        allowClear: true
-    });
-
-    $('#format-filter').select2({
-        placeholder: getPlaceholder('format-filter'),
-        allowClear: true
-    });
-
-    $('#date-filter').select2({
-        placeholder: getPlaceholder('date-filter'),
-        allowClear: true
-    });
-
-    // Fonction pour effectuer une requête AJAX
+jQuery(document).ready(function($) {
     function applyFilters() {
-        var category = $('#category-filter').val();
-        var format = $('#format-filter').val();
-        var dateOrder = $('#date-filter').val();
+        var category = $('#category-switch').closest('.dropdown').find('.dropdown__filter-selected').data('value');
+        var format = $('#format-switch').closest('.dropdown').find('.dropdown__filter-selected').data('value');
+        var dateOrder = $('#date-switch').closest('.dropdown').find('.dropdown__filter-selected').data('value');
 
         $.ajax({
             url: ajaxurl,
@@ -48,8 +51,8 @@ jQuery(document).ready(function($) {
         });
     }
 
-    // Ajouter des gestionnaires d'événements 'change' aux éléments de sélection
-    $('#category-filter, #format-filter, #date-filter').on('change', function() {
+    // Apply filters when a dropdown option is selected
+    $('.dropdown__filter-selected').on('change', function() {
         applyFilters();
     });
 });

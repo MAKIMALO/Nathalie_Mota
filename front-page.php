@@ -23,57 +23,73 @@
     <section class="section-filter">
         <form class="filter-form">
             <div class="filter-group-1">
-                <!-- Formulaire 1: Catégories -->
+                <!-- Formulaire 1 : Catégories -->
                 <div class="filter-group">
-                    <?php
-                    $categories = get_terms(array(
-                        'taxonomy' => 'categorie', // Utilisez le slug correct de votre taxonomy
+                    <?php $categories = get_terms(array(
+                        'taxonomy' => 'categorie',
                         'hide_empty' => false,
-                    ));
-                    ?>
-                    <label for="category-filter" class="visually-hidden">Catégories</label>
-                    <select id="category-filter" name="category" placeholder="Catégorie">
-                        <option></option> <!-- Option vide -->
-                        <?php if (!empty($categories) && !is_wp_error($categories)) : ?>
-                            <?php foreach ($categories as $category) : ?>
-                                <option value="<?= $category->term_id; ?>"><?= $category->name; ?></option>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </select>
+                    )); ?>
+                    <div class="dropdown">
+                        <input type="checkbox" class="dropdown__switch" id="category-switch" hidden />
+                        <label for="category-switch" class="dropdown__options-filter">
+                            <span class="dropdown__filter-selected">Catégories</span>
+                            <span class="dropdown__arrow"></span>
+                            <ul class="dropdown__filter" role="listbox" tabindex="-1">
+                                <li class="dropdown__select-option" role="option" data-value=""></li>
+                                <?php if (!empty($categories) && !is_wp_error($categories)) : ?>
+                                    <?php foreach ($categories as $category) : ?>
+                                        <li class="dropdown__select-option" role="option" data-value="<?= $category->term_id; ?>"><?= $category->name; ?></li>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </ul>
+                        </label>
+                    </div>
                 </div>
 
-                <!-- Formulaire 2: Formats -->
+                <!-- Formulaire 2 : Formats -->
                 <div class="filter-group">
-                    <?php
-                    $formats = get_terms(array(
+                    <?php $formats = get_terms(array(
                         'taxonomy' => 'format',
                         'hide_empty' => false,
-                    ));
-                    ?>
-                    <label for="format-filter" class="visually-hidden">Format</label>
-                    <select id="format-filter" name="format" placeholder="Format">
-                        <option></option> <!-- Option vide -->
-                        <?php if (!empty($formats) && !is_wp_error($formats)) : ?>
-                            <?php foreach ($formats as $format) : ?>
-                                <option value="<?= $format->term_id; ?>"><?= $format->name; ?></option>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </select>
+                    )); ?>
+                    <div class="dropdown">
+                        <input type="checkbox" class="dropdown__switch" id="format-switch" hidden />
+                        <label for="format-switch" class="dropdown__options-filter">
+                            <span class="dropdown__filter-selected">Format</span>
+                            <span class="dropdown__arrow"></span>
+                            <ul class="dropdown__filter" role="listbox" tabindex="-1">
+                                <li class="dropdown__select-option" role="option" data-value=""></li>
+                                <?php if (!empty($formats) && !is_wp_error($formats)) : ?>
+                                    <?php foreach ($formats as $format) : ?>
+                                        <li class="dropdown__select-option" role="option" data-value="<?= $format->term_id; ?>"><?= $format->name; ?></li>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </ul>
+                        </label>
+                    </div>
                 </div>
             </div>
+
             <div class="filter-group-2">
-                <!-- Formulaire 3: Tri par date -->
+                <!-- Formulaire 3 : Tri par date -->
                 <div class="filter-group">
-                    <label for="date-filter" class="visually-hidden">Trier par</label>
-                    <select id="date-filter" name="date_order" placeholder="Trier par">
-                        <option></option> <!-- Option vide -->
-                        <option value="DESC">Les plus récentes</option>
-                        <option value="ASC">Les plus anciennes</option>
-                    </select>
+                    <div class="dropdown">
+                        <input type="checkbox" class="dropdown__switch" id="date-switch" hidden />
+                        <label for="date-switch" class="dropdown__options-filter">
+                            <span class="dropdown__filter-selected">Trier par</span>
+                            <span class="dropdown__arrow"></span>
+                            <ul class="dropdown__filter" role="listbox" tabindex="-1">
+                                <li class="dropdown__select-option" role="option" data-value=""></li>
+                                <li class="dropdown__select-option" role="option" data-value="DESC">Les plus récents</li>
+                                <li class="dropdown__select-option" role="option" data-value="ASC">Les plus anciens</li>
+                            </ul>
+                        </label>
+                    </div>
                 </div>
             </div>
         </form>
     </section>
+
     <!-- Affichage de l'ensemble des pages "photos" -->
     <section class="section-gallery">
         <div class="photos-gallery">

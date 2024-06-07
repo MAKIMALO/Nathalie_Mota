@@ -23,24 +23,16 @@
         // Enqueue arrows_miniature script
         wp_enqueue_script( 'arrows_miniature-script', get_template_directory_uri() . '/js/arrows_miniature.js', array('jquery'), '1.2', true );
 
+        // Enqueue filters script
+        wp_enqueue_script( 'filters-script', get_template_directory_uri() . '/js/filters.js', array('jquery'), '1.2', true );
+
         // Enqueue load_more_button script
         wp_enqueue_script( 'load_more_button-script', get_template_directory_uri() . '/js/load_more_button.js', array('jquery'), '1.2', true );
         
          // Localize the load_more_button script with ajax URL
         wp_localize_script('load_more_button-script', 'ajax_params', array('ajax_url' => admin_url('admin-ajax.php')
+        
         ));
-    }
-
-    add_action('wp_enqueue_scripts', 'enqueue_select2');
-    function enqueue_select2() {
-        // CSS de Select2
-        wp_enqueue_style('select2-css', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css');
-        
-        // JS de Select2
-        wp_enqueue_script('select2-js', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array('jquery'), null, true);
-        
-        // Enqueue filters script pour initialiser Select2 et gérer les filtres AJAX
-        wp_enqueue_script('filters-js', get_template_directory_uri() . '/js/filters.js', array('jquery', 'select2-js'), null, true);
     }
     
 
