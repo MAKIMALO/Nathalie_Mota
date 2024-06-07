@@ -1,58 +1,112 @@
-console.log("le fichier filters.js fonctionne");
+console.log("Le fichier filters.js fonctionne");
 
-// Change option selected
-const labels = document.querySelectorAll('.dropdown__filter-selected');
-const options = document.querySelectorAll('.dropdown__select-option');
-
-options.forEach((option) => {
-    option.addEventListener('click', () => {
-        const label = option.closest('.dropdown').querySelector('.dropdown__filter-selected');
-        label.textContent = option.textContent;
-        label.dataset.value = option.dataset.value;
-
-        // Trigger a change event
-        const event = new Event('change');
-        label.dispatchEvent(event);
-    });
-});
-
-// Close dropdown onclick outside
-document.addEventListener('click', (e) => {
+document.addEventListener('DOMContentLoaded', function() {
     const toggles = document.querySelectorAll('.dropdown__switch');
-    const element = e.target;
+    const options = document.querySelectorAll('.dropdown__select-option');
+    const loadMoreButton = document.querySelector('.load_more');
 
-    if (Array.from(toggles).includes(element)) return;
+    options.forEach((option) => {
+        option.addEventListener('click', () => {
+            const label = option.closest('.dropdown').querySelector('.dropdown__filter-selected');
+            label.textContent = option.textContent;
+            label.dataset.value = option.dataset.value;
 
-    const isDropdownChild = element.closest('.dropdown__filter');
-    
-    if (!isDropdownChild) {
-        toggles.forEach(toggle => toggle.checked = false);
-    }
-});
+            // Retirer la classe "selected" de tous les éléments frères
+            option.closest('ul').querySelectorAll('.dropdown__select-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
 
-jQuery(document).ready(function($) {
-    function applyFilters() {
-        var category = $('#category-switch').closest('.dropdown').find('.dropdown__filter-selected').data('value');
-        var format = $('#format-switch').closest('.dropdown').find('.dropdown__filter-selected').data('value');
-        var dateOrder = $('#date-switch').closest('.dropdown').find('.dropdown__filter-selected').data('value');
+            // Ajouter la classe "selected" à l'élément cliqué
+            option.classList.add('selected');
 
-        $.ajax({
-            url: ajaxurl,
-            type: 'POST',
-            data: {
-                action: 'filter_photos',
-                category: category,
-                format: format,
-                date_order: dateOrder,
-            },
-            success: function(response) {
-                $('.photos-gallery').html(response);
+            // Appliquer les filtres lorsqu'une option est sélectionnée
+            applyFilters();
+        });
+    });
+
+    toggles.forEach((toggle) => {
+        toggle.addEventListener('click', () => {
+            const dropdown = toggle.closest('.dropdown');
+            dropdown.classList.toggle('dropdown--open');
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        const element = e.target;
+
+        if (!element.closest('.dropdown')) {
+            toggles.forEach((toggle) => {
+                toggle.checked = false;
+                const dropdown = toggle.closest('.dropdown');
+                dropdown.classList.remove('dropdown--open');
+            });
+        }
+    });
+
+    function applyFilters(page = 1) {
+        const category = document.querySelector('#category-switch').closest('.dropdown').querySelector('.dropdown__filter-selected').dataset.value;
+        const format = document.querySelector('#format-switch').closest('.dropdown').querySelector('.dropdown__filter-selected').dataset.value;
+        const dateOrder = document.querySelector('#date-switch').closest('.dropdown').querySelector('.dropdown__filter-selected').dataset.value;
+
+        const formData = new FormData();
+        formData.append('action', 'filter_photos');
+        formData.append('category', category);
+        formData.append('format', format);
+        formData.append('date_order', dateOrder);
+        formData.append('page', page);
+
+        fetch(ajax_params.ajax_url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector('.photos-gallery').innerHTML = data.html;
+            if (data.total > page * 8) {
+                loadMoreButton.style.display = 'block';
+            } else {
+                loadMoreButton.style.display = 'none';
             }
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
     }
 
-    // Apply filters when a dropdown option is selected
-    $('.dropdown__filter-selected').on('change', function() {
-        applyFilters();
+    // Initial load
+    applyFilters();
+
+    loadMoreButton.addEventListener('click', () => {
+        const currentPage = parseInt(loadMoreButton.dataset.page) || 1;
+        const nextPage = currentPage + 1;
+
+        const category = document.querySelector('#category-switch').closest('.dropdown').querySelector('.dropdown__filter-selected').dataset.value;
+        const format = document.querySelector('#format-switch').closest('.dropdown').querySelector('.dropdown__filter-selected').dataset.value;
+        const dateOrder = document.querySelector('#date-switch').closest('.dropdown').querySelector('.dropdown__filter-selected').dataset.value;
+
+        const formData = new FormData();
+        formData.append('action', 'filter_photos');
+        formData.append('category', category);
+        formData.append('format', format);
+        formData.append('date_order', dateOrder);
+        formData.append('page', nextPage);
+
+        fetch(ajax_params.ajax_url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector('.photos-gallery').innerHTML += data.html;
+            if (data.total > nextPage * 8) {
+                loadMoreButton.style.display = 'block';
+            } else {
+                loadMoreButton.style.display = 'none';
+            }
+            loadMoreButton.dataset.page = nextPage;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     });
 });

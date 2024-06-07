@@ -433,7 +433,7 @@ header {
     justify-content: center;
     align-items: center;
     width: 70%;
-    margin: 0 auto;
+    margin: 50px 0 10px 0;
     .filter-form {
         display: flex;
         flex-direction: row;
@@ -463,7 +463,7 @@ header {
     display: inline-block;
     width: 260px;
     height: 43px;
-    border-radius: 8px;
+    border-radius: 8px; 
     .dropdown__options-filter {
         display: flex;
         justify-content: space-between;
@@ -489,7 +489,7 @@ header {
         height: 9px;
         border-right: 2px solid #333;
         border-bottom: 2px solid #333;
-        transition: transform 0.4s ease; 
+        transition: transform ease-in 0.4s; 
     }
     .dropdown__filter {
         display: none;
@@ -510,7 +510,29 @@ header {
         > li {
             list-style-type: none;
         }
+        .dropdown__select-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 4px 4px 4px 12px;
+            width: 243px;
+            height: 42px;
+            text-transform: none;
+            color: $modale-text-color;
+            letter-spacing: 0.03em;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 18px;
+        }
     }
+}
+
+.dropdown__select-option:hover {
+    background-color: $third-color;
+    width: 242px;
+    height: 42px;
 }
 
 .dropdown__switch:checked + .dropdown__options-filter {
@@ -533,27 +555,9 @@ header {
     border-top: none;
 }
 
-.dropdown__select-option {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 4px 4px 4px 12px;
-    width: 242px;
-    height: 42px;
-    text-transform: none;
-    color: $modale-text-color;
-    letter-spacing: 0.03em;
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 18px;
-}
-
-.dropdown__select-option:hover {
-    background-color: $third-color;
-    width: 242px;
-    height: 42px;
+.dropdown__select-option.selected {
+    background-color: $primary-color;
+    color: white !important;
 }
 
 
@@ -563,7 +567,7 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     width: 70%;
     .photos-gallery {
         display: flex;
@@ -583,6 +587,7 @@ header {
         position: relative;
         width: 272px;
         height: 50px;
+        margin-top: 20px;
         background: $button-background-color;
         box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.02);
         border-radius: 2px;

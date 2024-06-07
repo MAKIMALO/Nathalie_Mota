@@ -29,10 +29,9 @@
         // Enqueue load_more_button script
         wp_enqueue_script( 'load_more_button-script', get_template_directory_uri() . '/js/load_more_button.js', array('jquery'), '1.2', true );
         
-         // Localize the load_more_button script with ajax URL
-        wp_localize_script('load_more_button-script', 'ajax_params', array('ajax_url' => admin_url('admin-ajax.php')
-        
-        ));
+        // Localize the scripts with ajax URL
+        wp_localize_script('load_more_button-script', 'ajax_params', array('ajax_url' => admin_url('admin-ajax.php')));
+        wp_localize_script('my-filters-js', 'ajax_params', array('ajax_url' => admin_url('admin-ajax.php')));
     }
     
 
@@ -175,7 +174,7 @@ function filter_photos() {
         endwhile;
         wp_reset_postdata();
     else :
-        echo '<p>Aucune photo trouvée.</p>';
+        echo '<p>Aucune photo trouvée</p>';
     endif;
 
     die();

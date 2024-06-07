@@ -35,7 +35,7 @@
                             <span class="dropdown__filter-selected">Catégories</span>
                             <span class="dropdown__arrow"></span>
                             <ul class="dropdown__filter" role="listbox" tabindex="-1">
-                                <li class="dropdown__select-option" role="option" data-value=""></li>
+                                <li class="dropdown__select-option" role="option" data-value="">Catégories</li>
                                 <?php if (!empty($categories) && !is_wp_error($categories)) : ?>
                                     <?php foreach ($categories as $category) : ?>
                                         <li class="dropdown__select-option" role="option" data-value="<?= $category->term_id; ?>"><?= $category->name; ?></li>
@@ -55,10 +55,10 @@
                     <div class="dropdown">
                         <input type="checkbox" class="dropdown__switch" id="format-switch" hidden />
                         <label for="format-switch" class="dropdown__options-filter">
-                            <span class="dropdown__filter-selected">Format</span>
+                            <span class="dropdown__filter-selected">Formats</span>
                             <span class="dropdown__arrow"></span>
                             <ul class="dropdown__filter" role="listbox" tabindex="-1">
-                                <li class="dropdown__select-option" role="option" data-value=""></li>
+                                <li class="dropdown__select-option" role="option" data-value="">Formats</li>
                                 <?php if (!empty($formats) && !is_wp_error($formats)) : ?>
                                     <?php foreach ($formats as $format) : ?>
                                         <li class="dropdown__select-option" role="option" data-value="<?= $format->term_id; ?>"><?= $format->name; ?></li>
@@ -79,9 +79,9 @@
                             <span class="dropdown__filter-selected">Trier par</span>
                             <span class="dropdown__arrow"></span>
                             <ul class="dropdown__filter" role="listbox" tabindex="-1">
-                                <li class="dropdown__select-option" role="option" data-value=""></li>
-                                <li class="dropdown__select-option" role="option" data-value="DESC">Les plus récents</li>
-                                <li class="dropdown__select-option" role="option" data-value="ASC">Les plus anciens</li>
+                                <li class="dropdown__select-option" role="option" data-value="">Trier par</li>
+                                <li class="dropdown__select-option" role="option" data-value="DESC">Des plus récentes aux plus anciennes</li>
+                                <li class="dropdown__select-option" role="option" data-value="ASC">Des plus anciennes aux plus récentes</li>
                             </ul>
                         </label>
                     </div>
