@@ -1,39 +1,34 @@
 <?php
-    add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
-    function theme_enqueue_styles() {
-        // Enqueue theme style
-        wp_enqueue_style('theme-style', get_template_directory_uri() . '/sass/theme.css', array(), 
-        filemtime(get_stylesheet_directory() . '/sass/theme.css'), 'all');
-    }
+add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
+function theme_enqueue_styles() {
+    // Enqueue theme style
+    wp_enqueue_style('theme-style', get_template_directory_uri() . '/sass/theme.css', array(), 
+    filemtime(get_stylesheet_directory() . '/sass/theme.css'), 'all');
+}
 
-    add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts' );
-    function theme_enqueue_scripts() {
-        // Enqueue burger script
-        wp_enqueue_script( 'burger-script', get_template_directory_uri() . '/js/burger.js', array(), '1.2', true );
-        
-        // Enqueue modale script
-        wp_enqueue_script( 'modale-script', get_template_directory_uri() . '/js/modale.js', array(), '1.2', true );
-
-        // Enqueue lightbox script
-        wp_enqueue_script( 'lightbox-script', get_template_directory_uri() . '/js/lightbox.js', array(), '1.2', true );
-
-        // Enqueue jquery script
-	    wp_enqueue_script( 'jquery-script', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js', array('jquery'), '1.0', true);
-
-        // Enqueue arrows_miniature script
-        wp_enqueue_script( 'arrows_miniature-script', get_template_directory_uri() . '/js/arrows_miniature.js', array('jquery'), '1.2', true );
-
-        // Enqueue filters script
-        wp_enqueue_script( 'filters-script', get_template_directory_uri() . '/js/filters.js', array('jquery'), '1.2', true );
-
-        // Enqueue load_more_button script
-        wp_enqueue_script( 'load_more_button-script', get_template_directory_uri() . '/js/load_more_button.js', array('jquery'), '1.2', true );
-        
-        // Localize the scripts with ajax URL
-        wp_localize_script('load_more_button-script', 'ajax_params', array('ajax_url' => admin_url('admin-ajax.php')));
-        wp_localize_script('my-filters-js', 'ajax_params', array('ajax_url' => admin_url('admin-ajax.php')));
-    }
+add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts' );
+function theme_enqueue_scripts() {
+    // Enqueue burger script
+    wp_enqueue_script( 'burger-script', get_template_directory_uri() . '/js/burger.js', array(), '1.2', true );
     
+    // Enqueue modale script
+    wp_enqueue_script( 'modale-script', get_template_directory_uri() . '/js/modale.js', array(), '1.2', true );
+
+    // Enqueue lightbox script
+    wp_enqueue_script( 'lightbox-script', get_template_directory_uri() . '/js/lightbox.js', array(), '1.2', true );
+
+    // Enqueue jquery script
+    wp_enqueue_script( 'jquery-script', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js', array('jquery'), '1.0', true);
+
+    // Enqueue arrows_miniature script
+    wp_enqueue_script( 'arrows_miniature-script', get_template_directory_uri() . '/js/arrows_miniature.js', array('jquery'), '1.2', true );
+
+    // Enqueue photo_gallery script
+    wp_enqueue_script( 'photo_gallery-script', get_template_directory_uri() . '/js/photo_gallery.js', array('jquery'), '1.2', true );
+    
+    // Localize the script photo_gallery with ajax URL
+    wp_localize_script('photo_gallery-script', 'ajax_params', array('ajax_url' => admin_url('admin-ajax.php')));
+}
 
 // Ajout de l'onglet "Menus" sur le dashboard dans WP - dossier "Apparence" 
 function register_my_menus() {
@@ -47,7 +42,7 @@ function register_my_menus() {
 add_action( 'after_setup_theme', 'register_my_menus');
 
 
-// Ajout de la fonction Walker
+// Ajout de la fonction Walker sur le header
 function register_custom_nav_walker(){
     require_once get_template_directory() . '/walker-menus.php';
 }
@@ -97,47 +92,27 @@ function change_photo_slug_structure($args, $post_type) {
 add_filter('register_post_type_args', 'change_photo_slug_structure', 10, 2);
 
 
-// Ajout de la fonction "load_more_photos" pour traiter la requête Ajax sur le bouton "load_more" de la page "front_page.php"
-function load_more_photos() {
-    $page = intval($_POST['page']);
-    $per_page = intval($_POST['per_page']);
-
-    $args = array(
-        'post_type' => 'photos',
-        'posts_per_page' => $per_page,
-        'paged' => $page,
-    );
-
-    $query = new WP_Query($args);
-
-    if ($query->have_posts()) :
-        while ($query->have_posts()) : $query->the_post();
-            $post_id = get_the_ID();
-            $image_url = get_the_post_thumbnail_url($post_id, 'large');
-            $image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
-            include(get_template_directory() . '/template-parts/photo_block.php');
-        endwhile;
-        wp_reset_postdata();
-    else:
-        echo '';
-    endif;
-
-    wp_die();
-}
-
-add_action('wp_ajax_load_more_photos', 'load_more_photos');
-add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
+// Ajout de la route REST pour charger les photos
+add_action('rest_api_init', function () {
+    register_rest_route('custom/v1', '/load-photos/', array(
+        'methods' => 'POST',
+        'callback' => 'load_photos',
+    ));
+});
 
 
-// Ajout de la fonction "filters_photos" pour traiter la requête Ajax sur les filtres de la page "front_page.php"
-function filter_photos() {
+// Fonction pour charger les photos
+function load_photos() {
+    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+    $per_page = isset($_POST['per_page']) ? intval($_POST['per_page']) : 8;
     $category = isset($_POST['category']) ? intval($_POST['category']) : '';
     $format = isset($_POST['format']) ? intval($_POST['format']) : '';
     $date_order = isset($_POST['date_order']) ? sanitize_text_field($_POST['date_order']) : 'DESC';
 
     $args = array(
         'post_type' => 'photos',
-        'posts_per_page' => 8,
+        'posts_per_page' => $per_page,
+        'paged' => $page,
         'order' => $date_order,
     );
 
@@ -145,7 +120,7 @@ function filter_photos() {
 
     if ($category) {
         $tax_query[] = array(
-            'taxonomy' => 'categorie', // Utilisez le slug correct de votre taxonomy
+            'taxonomy' => 'categorie',
             'field' => 'term_id',
             'terms' => $category,
         );
@@ -165,6 +140,8 @@ function filter_photos() {
 
     $query = new WP_Query($args);
 
+    ob_start();
+
     if ($query->have_posts()) :
         while ($query->have_posts()) : $query->the_post();
             $image_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
@@ -177,9 +154,13 @@ function filter_photos() {
         echo '<p>Aucune photo trouvée</p>';
     endif;
 
-    die();
+    $html = ob_get_clean();
+    $total = $query->found_posts;
+
+    echo json_encode(array('html' => $html, 'total' => $total));
+    wp_die();
 }
-add_action('wp_ajax_filter_photos', 'filter_photos');
-add_action('wp_ajax_nopriv_filter_photos', 'filter_photos');
+add_action('wp_ajax_load_photos', 'load_photos');
+add_action('wp_ajax_nopriv_load_photos', 'load_photos');
 
 ?>
