@@ -2,6 +2,8 @@
 
 </main>
 
+<div class="lightbox"></div>
+
 <footer class="footer_site_menu">
     <?php wp_nav_menu(
         array(

@@ -14,14 +14,14 @@ function theme_enqueue_scripts() {
     // Enqueue modale script
     wp_enqueue_script( 'modale-script', get_template_directory_uri() . '/js/modale.js', array(), '1.2', true );
 
-    // Enqueue lightbox script
-    wp_enqueue_script( 'lightbox-script', get_template_directory_uri() . '/js/lightbox.js', array(), '1.2', true );
-
     // Enqueue jquery script
     wp_enqueue_script( 'jquery-script', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js', array('jquery'), '1.0', true);
 
     // Enqueue arrows_miniature script
     wp_enqueue_script( 'arrows_miniature-script', get_template_directory_uri() . '/js/arrows_miniature.js', array('jquery'), '1.2', true );
+
+    // Enqueue lightbox script
+    wp_enqueue_script( 'lightbox-script', get_template_directory_uri() . '/js/lightbox.js', array(), '1.2', true );
 
     // Enqueue photo_gallery script
     wp_enqueue_script( 'photo_gallery-script', get_template_directory_uri() . '/js/photo_gallery.js', array('jquery'), '1.2', true );
@@ -100,14 +100,6 @@ add_action('rest_api_init', function () {
     ));
 });
 
-// Ajout de la route REST pour le slider des photos sur la lightbox
-add_action('rest_api_init', function () {
-    register_rest_route('custom/v1', '/load-slider-photos/', array(
-        'methods' => 'GET',
-        'callback' => 'load_slider_photos',
-    ));
-});
-
 
 // Ajout de la fonction "load_photos" pour charger les photos sur la page "front-page.php"
 function load_photos() {
@@ -171,31 +163,5 @@ function load_photos() {
 add_action('wp_ajax_load_photos', 'load_photos');
 add_action('wp_ajax_nopriv_load_photos', 'load_photos');
 
-
-// Ajout de la fonction "load_slider_photos" pour charger les photos sur la lightbox
-function load_slider_photos() {
-    $args = array(
-        'post_type' => 'photos',
-        'posts_per_page' => -1,
-    );
-
-    $query = new WP_Query($args);
-    $photos = array();
-
-    if ($query->have_posts()) {
-        while ($query->have_posts()) {
-            $query->the_post();
-            $image_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
-            $title = get_the_title();
-            $photos[] = array(
-                'image' => $image_url,
-                'title' => $title,
-            );
-        }
-        wp_reset_postdata();
-    }
-
-    return new WP_REST_Response($photos, 200);
-}
 
 ?>
