@@ -100,8 +100,16 @@ add_action('rest_api_init', function () {
     ));
 });
 
+// Ajout de la route REST pour le slider des photos sur la lightbox
+add_action('rest_api_init', function () {
+    register_rest_route('custom/v1', '/load-slider-photos/', array(
+        'methods' => 'GET',
+        'callback' => 'load_slider_photos',
+    ));
+});
 
-// Fonction pour charger les photos
+
+// Ajout de la fonction "load_photos" pour charger les photos sur la page "front-page.php"
 function load_photos() {
     $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
     $per_page = isset($_POST['per_page']) ? intval($_POST['per_page']) : 8;
@@ -162,5 +170,32 @@ function load_photos() {
 }
 add_action('wp_ajax_load_photos', 'load_photos');
 add_action('wp_ajax_nopriv_load_photos', 'load_photos');
+
+
+// Ajout de la fonction "load_slider_photos" pour charger les photos sur la lightbox
+function load_slider_photos() {
+    $args = array(
+        'post_type' => 'photos',
+        'posts_per_page' => -1,
+    );
+
+    $query = new WP_Query($args);
+    $photos = array();
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $image_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
+            $title = get_the_title();
+            $photos[] = array(
+                'image' => $image_url,
+                'title' => $title,
+            );
+        }
+        wp_reset_postdata();
+    }
+
+    return new WP_REST_Response($photos, 200);
+}
 
 ?>

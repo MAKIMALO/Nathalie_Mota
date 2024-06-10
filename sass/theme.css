@@ -463,7 +463,7 @@ header {
   align-items: center;
   cursor: pointer;
   padding: 4px 4px 4px 12px;
-  width: 243px;
+  width: 245px;
   height: 42px;
   text-transform: none;
   color: #313144;
@@ -477,8 +477,6 @@ header {
 
 .dropdown__select-option:hover {
   background-color: #FFD6D6;
-  width: 242px;
-  height: 42px;
 }
 
 .dropdown__switch:checked + .dropdown__options-filter {
