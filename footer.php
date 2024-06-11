@@ -1,10 +1,12 @@
-<?php get_template_part( 'template-parts/contact_modale' ); ?>
 
-</main>
-
-<div class="lightbox"></div>
-
-<footer class="footer_site_menu">
+<footer>
+    <div class="modal-overlay">    
+        <?php get_template_part('template-parts/contact_modale'); ?>
+    </div>
+    <div id="lightbox-overlay">
+        <?php get_template_part('template-parts/lightbox'); ?>
+    </div>
+    <div class="footer_site_menu">
     <?php wp_nav_menu(
         array(
             'theme_location' => 'footer-menu',
@@ -12,9 +14,8 @@
         )
     );
     ?>
-
+    </div>
 </footer>
-</div>
 
 <?php wp_footer(); ?>
 

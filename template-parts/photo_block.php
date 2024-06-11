@@ -20,28 +20,29 @@ if ( !$reference ) {
 }
 ?>
 
-<div id="photo-block" data-photo-id="<?php echo esc_attr($post_id); ?>">
-    <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" id="photo-block__img">
+<div id="photo-block" data-photo-id="<?php echo esc_attr($post_id); ?>" data-image-url="<?php echo esc_url($image_url); ?>">
+    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>" id="photo-block__img">
     <div id="photo-block-survol">
         <div id="photo-icon-group">
             <div id="photo_icon_fullscreen">
-                <a href="<?php echo esc_url( $image_url ); ?>" data-reference="<?php echo esc_attr( $reference ); ?>" data-category="<?php echo esc_attr( $category ); ?>">
+                <a href="#" class="fullscreen-icon" data-fancybox data-caption="<?php echo esc_attr($reference); ?> - <?php echo esc_attr($category); ?>">
                     <img class="img_icon_fullscreen" src="<?php echo get_template_directory_uri() . '/assets/images/icon_fullscreen.webp'; ?>" alt="Image d'un icône plein écran">
                 </a>
-            </div>    
+            </div>
             <div id="photo_icon_eye">
-                <a href="<?php echo get_permalink( $post_id ); ?>">
+                <a href="<?php echo get_permalink($post_id); ?>">
                     <img class="img_icon_eye" src="<?php echo get_template_directory_uri() . '/assets/images/icon_eye.webp'; ?>" alt="Image d'un icône oeil">
                 </a>
             </div>
         </div>
         <div id="photo-info__details">
             <div class="photo_block_details_left">
-                <p class="photo_block_reference"><?php echo esc_html( $reference ); ?></p>
+                <p class="photo_block_reference"><?php echo esc_html($reference); ?></p>
             </div>
             <div class="photo_block_details_right">
-                <p class="photo_block_categorie"><?php echo esc_html( $category ); ?></p>
+                <p class="photo_block_categorie"><?php echo esc_html($category); ?></p>
             </div>
         </div>
     </div>
 </div>
+

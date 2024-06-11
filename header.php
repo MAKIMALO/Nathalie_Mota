@@ -6,6 +6,7 @@
     <title>Nathalie Mota : photographe professionnelle dans l'événementiel</title>
     <meta name="description" content="En tant que photographe professionnelle, Nathalie Mota vous propose des prestations de qualité pour tous vos événements" />
     <?php wp_head(); ?>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-nFV1yOU0zU+n04xUxUNBhrZQ14gVFC9MfLF/XgGJKcSHcKEzz1XU+jrc74mdn5d+2n0XyGXpl1LhZEmcNXFv7w==" crossorigin="anonymous" />
     <?php
     // Récupérer le nombre total de photos dans le CPT "photos"
     $total_photos = wp_count_posts('photos')->publish;
@@ -40,7 +41,7 @@
             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/burger_menu.png" alt="Logo burger menu">
             </a>
             <a id="closeBtn" href="#">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/close_burger_menu.png" alt="Croix de fermeture du menu">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/close_btn.png" alt="Croix de fermeture du menu">
             </a>
         </nav>
 

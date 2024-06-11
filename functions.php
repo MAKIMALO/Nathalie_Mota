@@ -4,18 +4,21 @@ function theme_enqueue_styles() {
     // Enqueue theme style
     wp_enqueue_style('theme-style', get_template_directory_uri() . '/sass/theme.css', array(), 
     filemtime(get_stylesheet_directory() . '/sass/theme.css'), 'all');
+
+    // Enqueue CSS de FancyBox
+    wp_enqueue_style('fancybox', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css', array(), '3.5.7');
 }
 
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts' );
 function theme_enqueue_scripts() {
-    // Enqueue burger script
-    wp_enqueue_script( 'burger-script', get_template_directory_uri() . '/js/burger.js', array(), '1.2', true );
-    
-    // Enqueue modale script
-    wp_enqueue_script( 'modale-script', get_template_directory_uri() . '/js/modale.js', array(), '1.2', true );
-
     // Enqueue jquery script
     wp_enqueue_script( 'jquery-script', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js', array('jquery'), '1.0', true);
+
+    // Enqueue burger script
+    wp_enqueue_script( 'burger-script', get_template_directory_uri() . '/js/burger.js', array(), '1.2', true );
+   
+    // Enqueue modale script
+    wp_enqueue_script( 'modale-script', get_template_directory_uri() . '/js/modale.js', array(), '1.2', true );
 
     // Enqueue arrows_miniature script
     wp_enqueue_script( 'arrows_miniature-script', get_template_directory_uri() . '/js/arrows_miniature.js', array('jquery'), '1.2', true );
@@ -25,10 +28,14 @@ function theme_enqueue_scripts() {
 
     // Enqueue photo_gallery script
     wp_enqueue_script( 'photo_gallery-script', get_template_directory_uri() . '/js/photo_gallery.js', array('jquery'), '1.2', true );
-    
+   
     // Localize the script photo_gallery with ajax URL
     wp_localize_script('photo_gallery-script', 'ajax_params', array('ajax_url' => admin_url('admin-ajax.php')));
+
+    // Enqueue JS de FancyBox
+    wp_enqueue_script('fancybox', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', array('jquery'), '3.5.7', true);
 }
+
 
 // Ajout de l'onglet "Menus" sur le dashboard dans WP - dossier "Apparence" 
 function register_my_menus() {

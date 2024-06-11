@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<main id="main" class="site-main">
+<main id="home-content">
     <section class="banner">
         <?php
             $args = array(
