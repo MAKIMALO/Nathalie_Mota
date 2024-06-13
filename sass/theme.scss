@@ -41,14 +41,8 @@ $ddd : #E5E5E5;
 }
 
 body {
-    width: 100%;
-    height: auto;
-    margin: 0;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
 #wpadminbar {
@@ -60,21 +54,17 @@ body {
     right: 0;
 }
 
-#home-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-#page {
-    height: auto;
-    margin: 0 auto;
-    width: 100%;
-}
-
 .current-menu-item a {
     font-weight: bold;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 > p {
+    display: flex;
+    text-align: justify;
 }
 
 
@@ -86,6 +76,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
     
 #header_site_menu {
@@ -96,10 +87,12 @@ header {
 .navbar {
     display: flex;
     flex-direction: row;
-    width: 85%;
+    width: 100%;
+    max-width: 1250px;
     height: 80px;
     justify-content: space-between;
     align-items: center;
+    margin: 0 2% 0 2%;
 }
 
 .logo img {
@@ -108,8 +101,10 @@ header {
 }
 
 #header_menu {
-    width: 100vw;
     display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
 }
 
 #openBtn,
@@ -144,7 +139,7 @@ header {
     color: black;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
     #menu-header {
         gap: 30px;
         font-size: calc(0.5rem + 1vw);
@@ -427,17 +422,24 @@ header {
 
 
 /*** FRONT-PAGE ***/
+.page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 .section-filter {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 70%;
+    width: 100%;
     margin: 40px 0 10px 0;
     .filter-form {
         display: flex;
-        flex-direction: row;
-        width: 100%;
+        width: 70%;
         max-width: 1180px;
         justify-content: center;
         align-items: center;
@@ -445,6 +447,7 @@ header {
         margin: 0 20px;
         .filter-group-1 {
             display: flex;
+            flex-direction: row;
             justify-content: space-between;
             align-items: center;
             width: 50%;
@@ -559,6 +562,24 @@ header {
 }
 
 
+@media (max-width: 1115px) {
+    .section-filter .filter-form .filter-group-1 {
+        flex-direction: column;
+        gap: 12px;
+        width: auto;
+    }
+}
+
+@media (max-width: 750px) {
+    .section-filter .filter-form {
+        flex-direction: column;
+    }
+    .section-filter .filter-form .filter-group-2 {
+        margin-top: 12px;
+        width: auto;
+    }
+}
+
 /*** GALLERY PHOTOS ***/
 .section-gallery {
     display: flex;
@@ -566,14 +587,13 @@ header {
     justify-content: center;
     align-items: center;
     margin-bottom: 40px;
-    width: 70%;
+    width: 100%;
     .photos-gallery {
         display: flex;
-        flex-direction: row;
         flex-wrap: wrap;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
+        width: 72%;
+        justify-content: space-between;
+        align-items: flex-start;
         margin: 0 auto;
     }
     .load_more {
@@ -975,8 +995,11 @@ header {
 /*** TEMPLATE PHOTO_BLOCK ***/
 #photo-block {
     width: 48%;
+    height: 495px;
     position: relative;
     margin: 10px;
+    flex: 1 1 calc(48% - 16px); /* Ajuster la taille des éléments pour occuper environ 48% de la largeur disponible moins la moitié de l'écart */
+    min-width: 300px; /* Définir une largeur minimale pour les éléments */
     #photo-block__img {
         width: 100%;
         height: 495px;
@@ -1070,7 +1093,7 @@ header {
             #photo-block__img {
                 width: 100%;
                 height: 100%;
-                max-height: 400px;
+                max-height: 500px;
             }
     }
     
@@ -1078,7 +1101,7 @@ header {
         #photo-block-survol {
             width: 100%;
             height: 100%;
-            max-height: 400px;
+            max-height: 500px;
         }
     }
 }

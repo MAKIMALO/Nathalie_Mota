@@ -19,7 +19,7 @@
 <body>
 
 <?php wp_body_open(); ?>
-<div id="page" class="site">
+
     <header id="header_site_menu">
         <nav class="navbar">
             <div class="logo">
