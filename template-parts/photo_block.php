@@ -1,21 +1,23 @@
-<!-- Template du cadre d'une photo -->
 <?php
-
-if ( !isset( $image_url ) || !isset( $image_alt ) ) {
+// Vérification de la disponibilité des données d'image
+if (!isset($image_url) || !isset($image_alt) || !isset($post_id)) {
+    echo '<p>Erreur : données d\'image non disponibles.</p>';
     return;
 }
 
-// Récupérer les informations de la photo depuis le CPT
-$category = get_the_terms( $post_id, 'categorie' );
-$reference = get_post_meta( $post_id, 'reference', true );
+// Récupération des informations de la photo depuis le CPT
+$category = get_the_terms($post_id, 'categorie');
+$reference = get_post_meta($post_id, 'reference', true);
 
-if ( $category && ! is_wp_error( $category ) ) {
+// Vérification et formatage des données de catégorie
+if ($category && !is_wp_error($category)) {
     $category = $category[0]->name;
 } else {
     $category = 'Aucune catégorie';
 }
 
-if ( !$reference ) {
+// Vérification et formatage de la référence
+if (!$reference) {
     $reference = 'Aucune référence';
 }
 ?>
@@ -25,7 +27,7 @@ if ( !$reference ) {
     <div id="photo-block-survol">
         <div id="photo-icon-group">
             <div id="photo_icon_fullscreen">
-                <a href="#" class="fullscreen-icon" data-fancybox data-caption="<?php echo esc_attr($reference); ?> - <?php echo esc_attr($category); ?>">
+                <a href="#" class="fullscreen-icon" data-caption="<?php echo esc_attr($reference); ?> - <?php echo esc_attr($category); ?>">
                     <img class="img_icon_fullscreen" src="<?php echo get_template_directory_uri() . '/assets/images/icon_fullscreen.webp'; ?>" alt="Image d'un icône plein écran">
                 </a>
             </div>
@@ -45,4 +47,3 @@ if ( !$reference ) {
         </div>
     </div>
 </div>
-

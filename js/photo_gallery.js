@@ -41,10 +41,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function applyFilters(page = 1) {
-        const category = document.querySelector('#category-switch').closest('.dropdown').querySelector('.dropdown__filter-selected').dataset.value;
-        const format = document.querySelector('#format-switch').closest('.dropdown').querySelector('.dropdown__filter-selected').dataset.value;
-        const dateOrder = document.querySelector('#date-switch').closest('.dropdown').querySelector('.dropdown__filter-selected').dataset.value;
-
+        const categorySwitch = document.querySelector('#category-switch');
+        const formatSwitch = document.querySelector('#format-switch');
+        const dateSwitch = document.querySelector('#date-switch');
+    
+        // Vérifier que les éléments existent avant d'accéder à closest
+        const category = categorySwitch ? categorySwitch.closest('.dropdown').querySelector('.dropdown__filter-selected').dataset.value : '';
+        const format = formatSwitch ? formatSwitch.closest('.dropdown').querySelector('.dropdown__filter-selected').dataset.value : '';
+        const dateOrder = dateSwitch ? dateSwitch.closest('.dropdown').querySelector('.dropdown__filter-selected').dataset.value : '';
+    
         const formData = new FormData();
         formData.append('action', 'load_photos');
         formData.append('category', category);
@@ -52,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('date_order', dateOrder);
         formData.append('page', page);
         formData.append('per_page', 8);
-
+    
         fetch(ajax_params.ajax_url, {
             method: 'POST',
             body: formData
@@ -75,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error:', error);
         });
     }
-
+    
     applyFilters();
 
     // Gestion du bouton "Charger plus"

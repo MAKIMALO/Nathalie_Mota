@@ -19,9 +19,7 @@
 
 <?php wp_footer(); ?>
 
-<!-- Inclusion des fichiers script modale.js et lightbox.js -->
-<script src="<?php echo get_template_directory_uri(); ?>/js/modale.js" type="text/javascript"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/lightbox.js" type="text/javascript"></script>
+
 
 </body>
 </html>

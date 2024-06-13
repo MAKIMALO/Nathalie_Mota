@@ -4,9 +4,6 @@ function theme_enqueue_styles() {
     // Enqueue theme style
     wp_enqueue_style('theme-style', get_template_directory_uri() . '/sass/theme.css', array(), 
     filemtime(get_stylesheet_directory() . '/sass/theme.css'), 'all');
-
-    // Enqueue CSS de FancyBox
-    wp_enqueue_style('fancybox', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css', array(), '3.5.7');
 }
 
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts' );
@@ -14,17 +11,14 @@ function theme_enqueue_scripts() {
     // Enqueue jquery script
     wp_enqueue_script( 'jquery-script', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js', array('jquery'), '1.0', true);
 
-    // Enqueue burger script
-    wp_enqueue_script( 'burger-script', get_template_directory_uri() . '/js/burger.js', array(), '1.2', true );
-   
     // Enqueue modale script
     wp_enqueue_script( 'modale-script', get_template_directory_uri() . '/js/modale.js', array(), '1.2', true );
 
     // Enqueue arrows_miniature script
     wp_enqueue_script( 'arrows_miniature-script', get_template_directory_uri() . '/js/arrows_miniature.js', array('jquery'), '1.2', true );
 
-    // Enqueue lightbox script
-    wp_enqueue_script( 'lightbox-script', get_template_directory_uri() . '/js/lightbox.js', array(), '1.2', true );
+    // Enqueue burger script
+    wp_enqueue_script( 'burger-script', get_template_directory_uri() . '/js/burger.js', array(), '1.2', true );
 
     // Enqueue photo_gallery script
     wp_enqueue_script( 'photo_gallery-script', get_template_directory_uri() . '/js/photo_gallery.js', array('jquery'), '1.2', true );
@@ -32,8 +26,8 @@ function theme_enqueue_scripts() {
     // Localize the script photo_gallery with ajax URL
     wp_localize_script('photo_gallery-script', 'ajax_params', array('ajax_url' => admin_url('admin-ajax.php')));
 
-    // Enqueue JS de FancyBox
-    wp_enqueue_script('fancybox', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', array('jquery'), '3.5.7', true);
+    // Enqueue lightbox script
+    wp_enqueue_script( 'lightbox-script', get_template_directory_uri() . '/js/lightbox.js', array(), '1.2', true );
 }
 
 
@@ -108,7 +102,7 @@ add_action('rest_api_init', function () {
 });
 
 
-// Ajout de la fonction "load_photos" pour charger les photos sur la page "front-page.php"
+// Fonction pour charger les photos via AJAX
 function load_photos() {
     $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
     $per_page = isset($_POST['per_page']) ? intval($_POST['per_page']) : 8;
@@ -167,6 +161,7 @@ function load_photos() {
     echo json_encode(array('html' => $html, 'total' => $total));
     wp_die();
 }
+
 add_action('wp_ajax_load_photos', 'load_photos');
 add_action('wp_ajax_nopriv_load_photos', 'load_photos');
 
