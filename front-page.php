@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-    <section class="banner">
+    <div class="banner">
         <?php
         $args = array(
             'post_type' => 'photos',
@@ -16,7 +16,7 @@
         wp_reset_postdata();
         ?>
         <h1>PHOTOGRAPHE EVENT</h1>
-    </section>
+    </div>
     
     <!-- Affichage des filtres -->
     <div class="page-home">
