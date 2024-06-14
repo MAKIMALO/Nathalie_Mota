@@ -19,7 +19,7 @@
     </section>
     
     <!-- Affichage des filtres -->
-    <div class="page-container">
+    <div class="page-home">
         <section class="section-filter">
             <form class="filter-form">
                 <div class="filter-group-1">

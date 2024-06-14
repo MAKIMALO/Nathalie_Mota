@@ -22,7 +22,7 @@ if (!$reference) {
 }
 ?>
 
-<div id="photo-block" class="photo-item" data-photo-id="<?php echo esc_attr($post_id); ?>" data-image-url="<?php echo esc_url($image_url); ?>">
+<div id="photo-block" data-photo-id="<?php echo esc_attr($post_id); ?>" data-image-url="<?php echo esc_url($image_url); ?>">
     <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>" id="photo-block__img">
     <div id="photo-block-survol">
         <div id="photo-icon-group">
