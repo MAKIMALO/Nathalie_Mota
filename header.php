@@ -27,7 +27,7 @@
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.webp" alt="Logo Nathalie Mota">
                 </a>
             </div>
-            <div id="header_menu" role="navigation" aria-lebel="<?php _e('Menu principal', 'text-domain'); ?>">
+            <div class="header_menu" role="navigation" aria-lebel="<?php _e('Menu principal', 'text-domain'); ?>">
                 <?php wp_nav_menu(
                     array(
                         'theme_location' => 'main-menu',
