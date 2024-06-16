@@ -222,14 +222,20 @@ header {
         height: 100vh;
         width: 100%;
         background-color: $primary-color;
-        overflow: hidden;
-        transition: right 0.4s ease, opacity 0.4s ease !important;
         opacity: 0;
+        transform: translateX(100%);
+        transition: transform 0.4s ease, opacity 0.4s ease;
         z-index: 9999;
     }
     .header_menu.active {
         right: 0;
+        transform: translateX(0);
         opacity: 1;
+    }
+    .header_menu.active-closing {
+        right: 0;
+        transform: translateX(100%);
+        opacity: 0;
     }
     #menu-header {
         display: flex;
@@ -248,10 +254,10 @@ header {
         color: white;
         text-decoration: none;
         font-size: 18px;
-        transition: transform 0.3s ease;
     }
     #menu-header li a:hover {
-        transform: scale(1.1);
+        transform: scale(1.5) !important;
+        transition: transform 0.2s, filter 0.2s !important;
     }
     #openBtn, #closeBtn {
         position: absolute;
@@ -645,6 +651,12 @@ header {
     .load_more:hover {
         background-color: #000000;
         color: white;
+    }
+}
+
+@media (max-width: 400px) {
+    .section-gallery .load_more {
+        width: 250px;
     }
 }
 
@@ -1103,6 +1115,9 @@ header {
             padding: 0px 20px 0px 20px;
             text-align: center;
             .photo_block_reference {
+                position: absolute;
+                bottom: 0;
+                left: 4%;
                 font-family: 'Poppins';
                 font-weight: 500;
                 font-size: 14px;
@@ -1111,6 +1126,9 @@ header {
                 color: #FFFFFF;
             }
             .photo_block_categorie {
+                position: absolute;
+                bottom: 0;
+                right: 4%;
                 font-size: 14px;
                 line-height: 21px;
                 letter-spacing: 0.1em;
@@ -1131,38 +1149,99 @@ header {
         position: none;
         display: flex;
         justify-content: center;
-            #photo-block__img {
-                width: 100%;
-                height: auto;
-                max-height: 500px;
-            }
-    }
-    
-    #photo-block {
-        #photo-block-survol {
+        #photo-block__img {
             width: 100%;
             height: auto;
             max-height: 500px;
         }
+        #photo-block-survol {
+            width: 100%;
+            height: 100%;
+            #photo-info__details {
+                .photo_block_categorie {
+                    right: 6%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 790px) {
+    #photo-block #photo-block-survol #photo-info__details .photo_block_categorie {
+        right: 8%;
     }
 }
 
 @media (max-width: 650px) {
-    #photo-block {
-        margin: 0px 6px;
-            #photo-block__img {
-                height: auto;
-                max-height: 465px;
-            }
-    }
-    
-    #photo-block {
-        margin: 0px 6px;
-        #photo-block-survol {
-            height: auto;
-            max-height: 465px;
+    #photo-block #photo-block-survol #photo-info__details .photo_block_categorie {
+            right: 10%;
         }
     }
+
+@media (max-width: 550px) {
+    #photo-block #photo-block-survol {
+        #photo_icon_fullscreen {
+            img {
+                width: 31px;
+                height: 31px;
+            }
+        #photo_icon_eye {
+            .img_icon_eye {
+                width: 39px;
+                height: 24px;
+        }
+        #photo-info__details .photo_block_categorie {
+        right: 12%;
+        }
+    }
+}
+}
+}
+
+@media (max-width: 500px) {
+    #photo-block #photo-block-survol {
+        #photo_icon_fullscreen {
+            img {
+                width: 29px;
+                height: 29px;
+            }
+        #photo_icon_eye {
+            .img_icon_eye {
+                width: 36px;
+                height: 21px;
+        }
+        #photo-info__details .photo_block_categorie {
+        right: 14%;
+        }
+    }
+}
+}
+}
+
+@media (max-width: 410px) {
+    #photo-block #photo-block-survol #photo-info__details .photo_block_categorie {
+        right: 16%;
+    }
+}
+
+@media (max-width: 375px) {
+    #photo-block #photo-block-survol {
+        #photo_icon_fullscreen {
+            img {
+                width: 27x;
+                height: 27px;
+            }
+        #photo_icon_eye {
+            .img_icon_eye {
+                width: 36px;
+                height: 21px;
+        }
+        #photo-info__details .photo_block_categorie {
+        right: 18%;
+        }
+    }
+}
+}
 }
 
 /*** LIGHTBOX ***/

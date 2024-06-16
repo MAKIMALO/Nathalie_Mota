@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const openBtn = document.getElementById('openBtn');
     const closeBtn = document.getElementById('closeBtn');
     const topnav = document.querySelector('.header_menu');
-    
+
     if (!openBtn || !closeBtn || !topnav) {
         console.error('Un ou plusieurs éléments HTML requis sont manquants.');
         return;
@@ -12,48 +12,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function openMenu() {
         topnav.classList.add('active');
-        openBtn.style.display = 'none'; // Cacher le bouton hamburger
-        closeBtn.style.display = 'block'; // Afficher le bouton croix
+        topnav.classList.remove('active-closing'); // Assurez-vous que la classe de fermeture est retirée
+        openBtn.style.display = 'none';
+        closeBtn.style.display = 'block';
     }
-    
+
     function closeMenu() {
-        topnav.classList.remove('active');
-        openBtn.style.display = 'block'; // Afficher le bouton hamburger
-        closeBtn.style.display = 'none'; // Cacher le bouton croix
+        topnav.classList.add('active-closing'); // Ajoutez la classe de fermeture
+        // Utilisez un délai ou une écoute sur la fin de la transition CSS pour effectuer ces actions
+        setTimeout(() => {
+            topnav.classList.remove('active');
+            openBtn.style.display = 'block';
+            closeBtn.style.display = 'none';
+            topnav.classList.remove('active-closing');
+        }, 400); // Temps correspondant à la transition CSS
     }
-    
+
     openBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        topnav.style.transition = 'right 0.3s ease, opacity 0.3s ease'; // Activer la transition
         openMenu();
     });
-    
+
     closeBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        topnav.style.transition = 'right 0.3s ease, opacity 0.3s ease'; // Activer la transition
         closeMenu();
     });
-    
+
     function checkWindowSize() {
         if (window.innerWidth <= 375) {
-            openBtn.style.display = 'block'; // Afficher le bouton hamburger
-            closeBtn.style.display = 'none'; // Cacher le bouton croix
+            openBtn.style.display = 'block';
+            closeBtn.style.display = 'none';
             topnav.classList.remove('active');
+            topnav.classList.remove('active-closing');
         } else {
-            openBtn.style.display = 'none'; // Cacher le bouton hamburger
-            closeBtn.style.display = 'none'; // Cacher le bouton croix
+            openBtn.style.display = 'none';
+            closeBtn.style.display = 'none';
             topnav.classList.add('active');
         }
     }
-    
+
     window.addEventListener('resize', () => {
-        topnav.style.transition = 'none'; // Désactiver la transition lors du redimensionnement
         checkWindowSize();
-        setTimeout(() => {
-            topnav.style.transition = ''; // Réactiver la transition
-        }, 300); // Durée de la transition CSS
     });
-    
-    // Appel immédiat pour définir l'état correct au chargement de la page
+
     checkWindowSize();
 });
