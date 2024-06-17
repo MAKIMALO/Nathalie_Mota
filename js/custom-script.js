@@ -1,5 +1,6 @@
 console.log("Le fichier custom-script.js fonctionne");
 
+// ACTION SUR L'ICONE EYE DU FICHIER "PHOTO_BLOCK.PHP"
 document.addEventListener('DOMContentLoaded', function() {
     var eyeIcon = document.getElementById('photo_icon_eye');
 
@@ -14,3 +15,4 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Élément avec l\'ID photo_icon_eye non trouvé.');
     }
 });
+
