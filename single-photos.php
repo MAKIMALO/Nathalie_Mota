@@ -146,8 +146,6 @@ if ($all_photos_query->have_posts()) {
 
 <?php get_footer(); ?>
 
-
-<script src="<?php echo get_template_directory_uri(); ?>/js/arrows_miniature.js" type="text/javascript"></script>
 </body>
 
 </html>

@@ -1,0 +1,1 @@
+console.log("le fichier lightbox.js fonctionne");

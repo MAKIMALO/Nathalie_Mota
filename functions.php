@@ -11,17 +11,20 @@ function theme_enqueue_scripts() {
     // Enqueue jquery script
     wp_enqueue_script( 'jquery-script', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js', array('jquery'), '1.0', true);
 
+    // Enqueue custom script
+    wp_enqueue_script( 'custom-script', get_template_directory_uri() . '/js/custom-script.js', array(), '1.2', true );
+
     // Enqueue modale script
     wp_enqueue_script( 'modale-script', get_template_directory_uri() . '/js/modale.js', array(), '1.2', true );
 
-    // Enqueue arrows_miniature script
-    wp_enqueue_script( 'arrows_miniature-script', get_template_directory_uri() . '/js/arrows_miniature.js', array('jquery'), '1.2', true );
+    // Enqueue arrowsMiniature script
+    wp_enqueue_script( 'arrowsMiniature-script', get_template_directory_uri() . '/js/arrowsMiniature.js', array('jquery'), '1.2', true );
 
     // Enqueue burger script
     wp_enqueue_script( 'burger-script', get_template_directory_uri() . '/js/burger.js', array(), '1.2', true );
 
     // Enqueue photo_gallery script
-    wp_enqueue_script( 'photo_gallery-script', get_template_directory_uri() . '/js/photo_gallery.js', array('jquery'), '1.2', true );
+    wp_enqueue_script( 'photo_gallery-script', get_template_directory_uri() . '/js/photo_gallery.js', array(), '1.2', true );
    
     // Localize the script photo_gallery with ajax URL
     wp_localize_script('photo_gallery-script', 'ajax_params', array('ajax_url' => admin_url('admin-ajax.php')));
@@ -93,15 +96,6 @@ function change_photo_slug_structure($args, $post_type) {
 add_filter('register_post_type_args', 'change_photo_slug_structure', 10, 2);
 
 
-// Ajout de la route REST pour charger les photos
-add_action('rest_api_init', function () {
-    register_rest_route('custom/v1', '/load-photos/', array(
-        'methods' => 'POST',
-        'callback' => 'load_photos',
-    ));
-});
-
-
 // Fonction pour charger les photos via AJAX
 function load_photos() {
     $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
@@ -158,7 +152,7 @@ function load_photos() {
     $html = ob_get_clean();
     $total = $query->found_posts;
 
-    echo json_encode(array('html' => $html, 'total' => $total));
+    echo json_encode(array('html' => $html, 'total' => $total, 'success' => true));
     wp_die();
 }
 

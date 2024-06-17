@@ -27,7 +27,7 @@ if (!$reference) {
     <div id="photo-block-survol">
         <div id="photo-icon-group">
             <div id="photo_icon_fullscreen">
-                <a href="#" class="fullscreen-icon" data-caption="<?php echo esc_attr($reference); ?> - <?php echo esc_attr($category); ?>">
+                <span class="fullscreen-icon" data-caption="<?php echo esc_attr($reference); ?> - <?php echo esc_attr($category); ?>">
                     <img class="img_icon_fullscreen" src="<?php echo get_template_directory_uri() . '/assets/images/icon_fullscreen.webp'; ?>" alt="Image d'un icône plein écran">
                 </a>
             </div>
