@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*** GOOGLE FONTS ***/
 @font-face {
   font-family: "Space Mono BoldItalic";
@@ -1020,6 +1021,9 @@ header .navbar {
   opacity: 0;
   transition: opacity 0.5s ease;
 }
+#photo-block #photo-block-survol:hover {
+  opacity: 1;
+}
 #photo-block #photo-block-survol #photo_icon_fullscreen {
   position: absolute;
   top: 10px;
@@ -1161,7 +1165,7 @@ header .navbar {
   }
 }
 /*** LIGHTBOX ***/
-.lightbox-overlay {
+#lightbox-overlay {
   display: none;
   position: fixed;
   top: 0;
@@ -1171,60 +1175,140 @@ header .navbar {
   background: rgba(0, 0, 0, 0.8);
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 9999;
 }
-
-.lightbox-overlay.active {
-  display: flex;
-}
-
-.lightbox_container {
+#lightbox-overlay #lightbox-content {
   position: relative;
-  max-width: 100%;
-  max-height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  text-align: center;
+  height: 100%;
 }
-.lightbox_container .close_lightbox {
+#lightbox-overlay #lightbox-content .close_lightbox {
   position: absolute;
-  top: 10%;
-  right: -8%;
+  top: 20px;
+  right: -60px;
   cursor: pointer;
-  color: white;
-  transform: rotate(0);
-  transition: transform 500ms;
 }
-.lightbox_container .lightbox_photo_container {
+#lightbox-overlay #lightbox-content .close_lightbox > img {
+  filter: brightness(0) invert(1);
+  transition: transform 0.6s ease;
+}
+#lightbox-overlay #lightbox-content .close_lightbox > img:hover {
+  transform: rotate(180deg);
+}
+#lightbox-overlay #lightbox-content .lightbox-container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 100%;
-  max-height: 100%;
 }
-.lightbox_container .lightbox_photo_container .lightbox_image {
-  max-width: 80%;
-  max-height: 1024px;
+#lightbox-overlay #lightbox-content .lightbox-container #lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
   -o-object-fit: contain;
      object-fit: contain;
 }
-.lightbox_container .lightbox_arrows {
+#lightbox-overlay #lightbox-content .lightbox-container .lightbox-arrows {
   position: absolute;
   top: 50%;
-  height: 18px;
-  width: 200px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: calc(100% - 70px);
+  max-width: 90vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#lightbox-overlay #lightbox-content .lightbox-container .lightbox-arrows .lightbox_arrow_prev,
+#lightbox-overlay #lightbox-content .lightbox-container .lightbox-arrows .lightbox_arrow_next {
   cursor: pointer;
-  color: white;
-  font-family: "Space Mono";
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease, transform 0.3s ease;
+  pointer-events: auto;
+  z-index: 100;
+  position: absolute;
+  transform: translateY(-50%);
+  height: 18px; /* Hauteur fixe des flèches */
+  width: 100px; /* Largeur fixe des flèches */
+}
+#lightbox-overlay #lightbox-content .lightbox-container .lightbox-arrows .lightbox_arrow_prev:hover,
+#lightbox-overlay #lightbox-content .lightbox-container .lightbox-arrows .lightbox_arrow_next:hover {
+  filter: brightness(0.8) invert(1);
+  transform: scale(1.2) translateY(-50%);
+}
+#lightbox-overlay #lightbox-content .lightbox-container .lightbox-arrows .lightbox_arrow_prev {
+  left: 0; /* Ajustement à gauche */
+}
+#lightbox-overlay #lightbox-content .lightbox-container .lightbox-arrows .lightbox_arrow_next {
+  right: 0; /* Ajustement à droite */
+}
+#lightbox-overlay #lightbox-content #lightbox-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-family: "Poppins";
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
+  font-weight: 500;
+  font-size: 0.9em;
+  line-height: 1.5em;
+  text-transform: uppercase;
+  color: #FFFFFF;
 }
-.lightbox_container .lightbox_arrows .lightbox_arrow_previous {
-  left: -20% !important;
-  width: 200px;
+#lightbox-overlay #lightbox-content #lightbox-details .photo_details_left,
+#lightbox-overlay #lightbox-content #lightbox-details .photo_details_right {
+  display: flex;
+  width: 50%;
 }
-.lightbox_container .lightbox_arrows .lightbox_arrow_next {
-  right: -22%;
+#lightbox-overlay #lightbox-content #lightbox-details .photo_details_left {
+  display: flex;
+  justify-content: flex-start;
+}
+#lightbox-overlay #lightbox-content #lightbox-details .photo_details_right {
+  display: flex;
+  justify-content: flex-end;
+}
+#lightbox-overlay.landscape .lightbox-arrows .lightbox_arrow_prev {
+  left: -22% !important; /* Ajustement à gauche pour paysage */
+}
+#lightbox-overlay.landscape .lightbox-arrows .lightbox_arrow_next {
+  right: -22% !important; /* Ajustement à droite pour paysage */
+}
+#lightbox-overlay.portrait .lightbox-arrows .lightbox_arrow_prev {
+  left: -55% !important; /* Ajustement à gauche pour portrait */
+}
+#lightbox-overlay.portrait .lightbox-arrows .lightbox_arrow_next {
+  right: -55% !important; /* Ajustement à droite pour portrait */
+}
+
+@media (max-width: 840px) {
+  #lightbox-overlay #lightbox-content.landscape .lightbox-arrows .lightbox_arrow_prev {
+    left: -12% !important; /* Ajustement à gauche pour paysage */
+  }
+  #lightbox-overlay #lightbox-content.landscape .lightbox-arrows .lightbox_arrow_next {
+    right: -12% !important; /* Ajustement à droite pour paysage */
+  }
+  #lightbox-overlay #lightbox-content.portrait .lightbox-arrows .lightbox_arrow_prev {
+    left: -45% !important; /* Ajustement à gauche pour portrait */
+  }
+  #lightbox-overlay #lightbox-content.portrait .lightbox-arrows .lightbox_arrow_next {
+    right: -45% !important; /* Ajustement à droite pour portrait */
+  }
+}
+@media (max-width: 840px) and (max-width: 470px) {
+  #lightbox-overlay #lightbox-content.landscape .lightbox-arrows .lightbox_arrow_prev {
+    left: -6% !important; /* Ajustement à gauche pour paysage */
+  }
+  #lightbox-overlay #lightbox-content.landscape .lightbox-arrows .lightbox_arrow_next {
+    right: -6% !important; /* Ajustement à droite pour paysage */
+  }
+  #lightbox-overlay #lightbox-content.portrait .lightbox-arrows .lightbox_arrow_prev {
+    left: -10% !important; /* Ajustement à gauche pour portrait */
+  }
+  #lightbox-overlay #lightbox-content.portrait .lightbox-arrows .lightbox_arrow_next {
+    right: -10% !important; /* Ajustement à droite pour portrait */
+  }
 }/*# sourceMappingURL=theme.css.map */

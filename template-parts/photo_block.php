@@ -27,9 +27,13 @@ if (!$reference) {
     <div id="photo-block-survol">
         <div id="photo-icon-group">
             <div id="photo_icon_fullscreen">
-                <span class="fullscreen-icon" data-caption="<?php echo esc_attr($reference); ?> - <?php echo esc_attr($category); ?>">
-                    <img class="img_icon_fullscreen" src="<?php echo get_template_directory_uri() . '/assets/images/icon_fullscreen.webp'; ?>" alt="Image d'un icône plein écran">
-                </a>
+                <span class="fullscreen-icon"
+                      data-image-url="<?php echo esc_url($image_url); ?>"
+                      data-reference="<?php echo esc_attr($reference); ?>"
+                      data-category="<?php echo esc_attr($category); ?>"
+                      data-orientation="<?php echo (getimagesize($image_url)[0] > getimagesize($image_url)[1]) ? 'landscape' : 'portrait'; ?>">
+                    <img class="img_icon_fullscreen" src="<?php echo get_template_directory_uri() . '/assets/images/icon_fullscreen.webp'; ?>" alt="Image d'une icône plein écran">
+                </span>
             </div>
             <div id="photo_icon_eye">
                 <a href="<?php echo get_permalink($post_id); ?>">

@@ -51,6 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {
                         photosGallery.insertAdjacentHTML('beforeend', data.html);
                     }
+
+                    // Attacher les événements aux nouvelles images chargées
+                    attachFullscreenEvents();
                 } else {
                     console.error('Element .photos-gallery not found');
                 }
@@ -70,8 +73,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Fonction pour attacher les événements "fullscreen" aux nouvelles images chargées
+    function attachFullscreenEvents() {
+        photosGallery.querySelectorAll('.fullscreen-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const imageUrl = this.dataset.imageUrl;
+                const reference = this.dataset.reference;
+                const category = this.dataset.category;
+
+                openLightbox(imageUrl, reference, category);
+            });
+        });
+    }
+
     // Gestion des filtres
-    options.forEach((option) => {
+    options.forEach(option => {
         option.addEventListener('click', () => {
             const label = option.closest('.dropdown').querySelector('.dropdown__filter-selected');
             label.textContent = option.textContent;
@@ -85,4 +101,15 @@ document.addEventListener('DOMContentLoaded', function() {
             loadPhotos(1); // Recharger les photos depuis la première page après application des filtres
         });
     });
+
+    // Observer les mutations pour détecter l'ajout d'éléments à photosGallery
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            if (mutation.type === 'childList') {
+                attachFullscreenEvents(); // Réattacher les événements aux nouveaux éléments
+            }
+        });
+    });
+
+    observer.observe(photosGallery, { childList: true, subtree: true });
 });

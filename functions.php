@@ -30,7 +30,7 @@ function theme_enqueue_scripts() {
     wp_localize_script('photo_gallery-script', 'ajax_params', array('ajax_url' => admin_url('admin-ajax.php')));
 
     // Enqueue lightbox script
-    wp_enqueue_script( 'lightbox-script', get_template_directory_uri() . '/js/lightbox.js', array('jquery'), '1.2', true );
+    wp_enqueue_script( 'lightbox-script', get_template_directory_uri() . '/js/lightbox.js', array(), '1.2', true );
 }
 
 
