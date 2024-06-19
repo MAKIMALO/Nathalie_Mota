@@ -160,4 +160,39 @@ add_action('wp_ajax_load_photos', 'load_photos');
 add_action('wp_ajax_nopriv_load_photos', 'load_photos');
 
 
+// Fonction pour récupérer l'ensemble des photos via AJAX pour le slider de la lightbox
+function fetch_all_photos() {
+    // Vérifie les permissions de l'utilisateur
+    if ( ! check_ajax_referer( 'fetch_photos_nonce', 'nonce', false ) ) {
+        wp_send_json_error( 'Invalid nonce' );
+        return;
+    }
+
+    // Récupère toutes les photos du CPT
+    $args = array(
+        'post_type' => 'photos',
+        'posts_per_page' => -1,
+    );
+    $query = new WP_Query( $args );
+
+    $photos = array();
+
+    if ( $query->have_posts() ) {
+        while ( $query->have_posts() ) {
+            $query->the_post();
+            $photos[] = array(
+                'imageUrl' => get_the_post_thumbnail_url(),
+                'reference' => get_the_title(),
+                'category' => get_the_category_list( ', ' ),
+                'orientation' => ( get_post_meta( get_the_ID(), 'orientation', true ) ) ? get_post_meta( get_the_ID(), 'orientation', true ) : 'portrait'
+            );
+        }
+        wp_reset_postdata();
+    }
+
+    wp_send_json_success( $photos );
+}
+add_action( 'wp_ajax_fetch_all_photos', 'fetch_all_photos' );
+add_action( 'wp_ajax_nopriv_fetch_all_photos', 'fetch_all_photos' );
+
 ?>

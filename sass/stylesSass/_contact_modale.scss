@@ -1,0 +1,128 @@
+/*** CONTACT MODALE ***/
+.modale-overlay {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 80%;
+    max-width: 600px;
+    height: auto;
+    max-height: 100%;
+    margin-top: 10px;
+    overflow-y: auto;
+    background-color: white;
+    border: 5px solid black;
+    .modale-global {
+        position: relative;
+        width: 100%;
+        display: inline-block;
+        .modale-header {
+            position: relative;
+            .closeBtn {
+                position: absolute;
+                right: 0px;
+                border-radius:20px;
+                height:20px;
+                width:20px;
+                border:1px solid black;
+                background:white;
+                cursor:pointer;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                transition:all 0.4s ease;
+            }
+            .img_contact_modale {
+                max-height: 106px;
+                height: 100%;
+                width: 100%;
+                padding-top: 12px;
+            }
+        }
+        .modale {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+.modale-overlay.open {
+    display: block;
+    z-index: 10000;
+}
+
+
+.wpcf7 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .wpcf7-form {
+        width: 100%;
+        max-width: 340px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: left;
+        p {
+            width: 100%;
+            margin-bottom: 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        label {
+            font-family: 'Poppins';
+            font-weight: bold;
+            font-size: 12px;
+            color: $modale-text-color;
+            width: auto !important;
+            display: inline-block !important;
+        }
+        input,
+        textarea {
+            padding-left: 6px;
+        }
+        .wpcf7-submit {
+            font-size: 12px;
+            border-color: #D8D8D8;
+            background-color: #D8D8D8;
+            border-radius: 5px;
+            height: 50px;
+            width: 100%;
+            max-width: 340px !important;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .wpcf7-submit:hover {
+            background-color: #000000;
+            color: white;
+        }
+    }
+}
+
+.wpcf7-form-control-wrap {
+    .wpcf7-form-control {
+        border: 1px solid #B8BBC2;
+        border-radius: 5px;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+}
+
+.wpcf7-form-control-wrap .wpcf7-text,
+.wpcf7-form-control-wrap .wpcf7-textarea {
+    height: 40px;
+    width: 100% !important;
+}
+
+.wpcf7-form-control-wrap .wpcf7-textarea {
+    height: 210px;
+}

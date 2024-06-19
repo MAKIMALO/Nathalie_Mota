@@ -103,13 +103,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Observer les mutations pour détecter l'ajout d'éléments à photosGallery
-    const observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
-            if (mutation.type === 'childList') {
-                attachFullscreenEvents(); // Réattacher les événements aux nouveaux éléments
-            }
+    if (photosGallery) {
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                if (mutation.type === 'childList') {
+                    attachFullscreenEvents(); // Réattacher les événements aux nouveaux éléments
+                }
+            });
         });
-    });
 
-    observer.observe(photosGallery, { childList: true, subtree: true });
+        observer.observe(photosGallery, { childList: true, subtree: true });
+    }
 });

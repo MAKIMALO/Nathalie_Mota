@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*** GOOGLE FONTS ***/
 @font-face {
   font-family: "Space Mono BoldItalic";
@@ -46,6 +45,7 @@ body {
 
 h1 {
   text-align: center;
+  margin-top: 80px;
 }
 
 h2 > p {
@@ -53,6 +53,7 @@ h2 > p {
   text-align: justify;
 }
 
+/*** HEADER ***/
 /*** HEADER ***/
 header {
   width: 100%;
@@ -245,6 +246,7 @@ header .navbar {
   }
 }
 /*** FOOTER ***/
+/*** FOOTER ***/
 .footer_site_menu {
   display: flex;
   flex-direction: row;
@@ -322,6 +324,7 @@ header .navbar {
     padding-top: 10px;
   }
 }
+/*** BANNER ***/
 /*** BANNER ***/
 .banner {
   display: flex;
@@ -410,7 +413,8 @@ header .navbar {
     font-size: 28px;
   }
 }
-/*** FRONT-PAGE ***/
+/*** FILTERS ***/
+/*** FILTERS ***/
 .page-home {
   display: flex;
   flex-direction: column;
@@ -565,6 +569,7 @@ header .navbar {
   }
 }
 /*** GALLERY PHOTOS ***/
+/*** GALLERY PHOTOS ***/
 .section-gallery {
   display: flex;
   flex-direction: column;
@@ -609,6 +614,7 @@ header .navbar {
   }
 }
 /*** CONTACT MODALE ***/
+/*** CONTACT MODALE ***/
 .modale-overlay {
   display: none;
   position: fixed;
@@ -619,7 +625,7 @@ header .navbar {
   width: 80%;
   max-width: 600px;
   height: auto;
-  max-height: 95%;
+  max-height: 100%;
   margin-top: 10px;
   overflow-y: auto;
   background-color: white;
@@ -662,7 +668,7 @@ header .navbar {
 
 .modale-overlay.open {
   display: block;
-  z-index: 3;
+  z-index: 10000;
 }
 
 .wpcf7 {
@@ -734,6 +740,7 @@ header .navbar {
   height: 210px;
 }
 
+/*** SINGLE-PHOTOS ***/
 /*** SINGLE-PHOTOS ***/
 .page-container {
   display: flex;
@@ -988,6 +995,7 @@ header .navbar {
   }
 }
 /*** TEMPLATE PHOTO_BLOCK ***/
+/*** TEMPLATE PHOTO_BLOCK ***/
 #photo-block {
   width: 48%;
   height: 495px;
@@ -1165,6 +1173,7 @@ header .navbar {
   }
 }
 /*** LIGHTBOX ***/
+/*** LIGHTBOX ***/
 #lightbox-overlay {
   display: none;
   position: fixed;
@@ -1231,8 +1240,8 @@ header .navbar {
   z-index: 100;
   position: absolute;
   transform: translateY(-50%);
-  height: 18px; /* Hauteur fixe des flèches */
-  width: 100px; /* Largeur fixe des flèches */
+  height: 18px;
+  width: 100px;
 }
 #lightbox-overlay #lightbox-content .lightbox-container .lightbox-arrows .lightbox_arrow_prev:hover,
 #lightbox-overlay #lightbox-content .lightbox-container .lightbox-arrows .lightbox_arrow_next:hover {
@@ -1240,10 +1249,10 @@ header .navbar {
   transform: scale(1.2) translateY(-50%);
 }
 #lightbox-overlay #lightbox-content .lightbox-container .lightbox-arrows .lightbox_arrow_prev {
-  left: 0; /* Ajustement à gauche */
+  left: 0;
 }
 #lightbox-overlay #lightbox-content .lightbox-container .lightbox-arrows .lightbox_arrow_next {
-  right: 0; /* Ajustement à droite */
+  right: 0;
 }
 #lightbox-overlay #lightbox-content #lightbox-details {
   display: flex;
@@ -1272,43 +1281,66 @@ header .navbar {
   justify-content: flex-end;
 }
 #lightbox-overlay.landscape .lightbox-arrows .lightbox_arrow_prev {
-  left: -22% !important; /* Ajustement à gauche pour paysage */
+  left: -22% !important;
 }
 #lightbox-overlay.landscape .lightbox-arrows .lightbox_arrow_next {
-  right: -22% !important; /* Ajustement à droite pour paysage */
+  right: -22% !important;
 }
 #lightbox-overlay.portrait .lightbox-arrows .lightbox_arrow_prev {
-  left: -55% !important; /* Ajustement à gauche pour portrait */
+  left: -55% !important;
 }
 #lightbox-overlay.portrait .lightbox-arrows .lightbox_arrow_next {
-  right: -55% !important; /* Ajustement à droite pour portrait */
+  right: -55% !important;
 }
 
-@media (max-width: 840px) {
-  #lightbox-overlay #lightbox-content.landscape .lightbox-arrows .lightbox_arrow_prev {
-    left: -12% !important; /* Ajustement à gauche pour paysage */
-  }
-  #lightbox-overlay #lightbox-content.landscape .lightbox-arrows .lightbox_arrow_next {
-    right: -12% !important; /* Ajustement à droite pour paysage */
-  }
-  #lightbox-overlay #lightbox-content.portrait .lightbox-arrows .lightbox_arrow_prev {
-    left: -45% !important; /* Ajustement à gauche pour portrait */
-  }
-  #lightbox-overlay #lightbox-content.portrait .lightbox-arrows .lightbox_arrow_next {
-    right: -45% !important; /* Ajustement à droite pour portrait */
+@media (max-width: 980px) {
+  #lightbox-overlay #lightbox-content .lightbox-container #lightbox-img {
+    max-width: 85vw;
+    max-height: 85vh;
   }
 }
-@media (max-width: 840px) and (max-width: 470px) {
-  #lightbox-overlay #lightbox-content.landscape .lightbox-arrows .lightbox_arrow_prev {
-    left: -6% !important; /* Ajustement à gauche pour paysage */
+@media (max-width: 930px) {
+  #lightbox-overlay #lightbox-content .lightbox-container #lightbox-img {
+    max-width: 80vw;
+    max-height: 80vh;
   }
-  #lightbox-overlay #lightbox-content.landscape .lightbox-arrows .lightbox_arrow_next {
-    right: -6% !important; /* Ajustement à droite pour paysage */
+}
+@media (max-width: 860px) {
+  #lightbox-overlay #lightbox-content .lightbox-container #lightbox-img {
+    max-width: 75vw;
+    max-height: 75vh;
   }
-  #lightbox-overlay #lightbox-content.portrait .lightbox-arrows .lightbox_arrow_prev {
-    left: -10% !important; /* Ajustement à gauche pour portrait */
+}
+@media (max-width: 800px) {
+  #lightbox-overlay #lightbox-content .close_lightbox {
+    top: 30px;
+    right: -40px;
   }
-  #lightbox-overlay #lightbox-content.portrait .lightbox-arrows .lightbox_arrow_next {
-    right: -10% !important; /* Ajustement à droite pour portrait */
+  #lightbox-overlay #lightbox-content .lightbox-container #lightbox-img {
+    max-width: 70vw;
+    max-height: 70vh;
+  }
+  #lightbox-overlay #lightbox-content #lightbox-details {
+    font-size: 0.8em;
+  }
+}
+@media (max-width: 600px) {
+  #lightbox-overlay #lightbox-content .close_lightbox {
+    top: 50px;
+  }
+  #lightbox-overlay #lightbox-content .lightbox-container #lightbox-img {
+    max-width: 65vw;
+    max-height: 65vh;
+  }
+  #lightbox-overlay #lightbox-content .lightbox-container .lightbox-arrows {
+    width: calc(100% - 65px);
+  }
+  #lightbox-overlay #lightbox-content .lightbox-container .lightbox-arrows .lightbox_arrow_prev,
+  #lightbox-overlay #lightbox-content .lightbox-container .lightbox-arrows .lightbox_arrow_next {
+    height: 12px;
+    width: 60px;
+  }
+  #lightbox-overlay #lightbox-content #lightbox-details {
+    font-size: 0.7em;
   }
 }/*# sourceMappingURL=theme.css.map */
