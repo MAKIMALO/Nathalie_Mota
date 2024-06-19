@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('date_order', dateOrder);
         formData.append('page', page);
         formData.append('per_page', 8);
-        formData.append('security', ajax_params.ajax_nonce); // Ajout du nonce
 
         fetch(ajax_params.ajax_url, {
             method: 'POST',

@@ -27,7 +27,6 @@ function theme_enqueue_scripts() {
     wp_enqueue_script( 'photo_gallery-script', get_template_directory_uri() . '/js/photo_gallery.js', array(), '1.2', true );
     wp_localize_script('photo_gallery-script', 'ajax_params', array(
         'ajax_url' => admin_url('admin-ajax.php'),
-        'ajax_nonce' => wp_create_nonce('load_photos_nonce')
     ));
 
     // Enqueue lightbox script
@@ -100,8 +99,6 @@ add_filter('register_post_type_args', 'change_photo_slug_structure', 10, 2);
 
 // Fonction pour charger les photos sur photo_gallery.js via AJAX
 function load_photos() {
-    check_ajax_referer('load_photos_nonce', 'security');
-
     $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
     $per_page = isset($_POST['per_page']) ? intval($_POST['per_page']) : 8;
     $category = isset($_POST['category']) ? intval($_POST['category']) : '';
