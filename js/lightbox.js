@@ -25,12 +25,12 @@ document.addEventListener("DOMContentLoaded", function () {
         // Vérifie et met à jour les classes landscape et portrait en fonction de l'orientation
         updateLightboxOrientation(orientation);
 
-        lightbox.style.display = "flex"; // Affiche la lightbox
+        lightbox.style.display = "flex";
     }
 
     // Fonction pour fermer la lightbox
     function closeLightbox() {
-        lightbox.style.display = "none"; // Masque la lightbox
+        lightbox.style.display = "none";
     }
 
     // Fonction pour afficher la photo suivante

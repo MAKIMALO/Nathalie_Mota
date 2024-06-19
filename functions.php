@@ -25,12 +25,14 @@ function theme_enqueue_scripts() {
 
     // Enqueue photo_gallery script
     wp_enqueue_script( 'photo_gallery-script', get_template_directory_uri() . '/js/photo_gallery.js', array(), '1.2', true );
-   
-    // Localize the script photo_gallery with ajax URL
-    wp_localize_script('photo_gallery-script', 'ajax_params', array('ajax_url' => admin_url('admin-ajax.php')));
+    wp_localize_script('photo_gallery-script', 'ajax_params', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'ajax_nonce' => wp_create_nonce('load_photos_nonce')
+    ));
 
     // Enqueue lightbox script
     wp_enqueue_script( 'lightbox-script', get_template_directory_uri() . '/js/lightbox.js', array(), '1.2', true );
+
 }
 
 
@@ -96,8 +98,10 @@ function change_photo_slug_structure($args, $post_type) {
 add_filter('register_post_type_args', 'change_photo_slug_structure', 10, 2);
 
 
-// Fonction pour charger les photos via AJAX
+// Fonction pour charger les photos sur photo_gallery.js via AJAX
 function load_photos() {
+    check_ajax_referer('load_photos_nonce', 'security');
+
     $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
     $per_page = isset($_POST['per_page']) ? intval($_POST['per_page']) : 8;
     $category = isset($_POST['category']) ? intval($_POST['category']) : '';
@@ -159,40 +163,5 @@ function load_photos() {
 add_action('wp_ajax_load_photos', 'load_photos');
 add_action('wp_ajax_nopriv_load_photos', 'load_photos');
 
-
-// Fonction pour récupérer l'ensemble des photos via AJAX pour le slider de la lightbox
-function fetch_all_photos() {
-    // Vérifie les permissions de l'utilisateur
-    if ( ! check_ajax_referer( 'fetch_photos_nonce', 'nonce', false ) ) {
-        wp_send_json_error( 'Invalid nonce' );
-        return;
-    }
-
-    // Récupère toutes les photos du CPT
-    $args = array(
-        'post_type' => 'photos',
-        'posts_per_page' => -1,
-    );
-    $query = new WP_Query( $args );
-
-    $photos = array();
-
-    if ( $query->have_posts() ) {
-        while ( $query->have_posts() ) {
-            $query->the_post();
-            $photos[] = array(
-                'imageUrl' => get_the_post_thumbnail_url(),
-                'reference' => get_the_title(),
-                'category' => get_the_category_list( ', ' ),
-                'orientation' => ( get_post_meta( get_the_ID(), 'orientation', true ) ) ? get_post_meta( get_the_ID(), 'orientation', true ) : 'portrait'
-            );
-        }
-        wp_reset_postdata();
-    }
-
-    wp_send_json_success( $photos );
-}
-add_action( 'wp_ajax_fetch_all_photos', 'fetch_all_photos' );
-add_action( 'wp_ajax_nopriv_fetch_all_photos', 'fetch_all_photos' );
 
 ?>

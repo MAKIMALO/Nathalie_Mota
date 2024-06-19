@@ -1,4 +1,4 @@
-console.log("Le fichier photo_gallery.js fonctionne");
+console.log("le fichier photo_gallery.js fonctionne");
 
 document.addEventListener('DOMContentLoaded', function() {
     const photosGallery = document.querySelector('.photos-gallery');
@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
         loadMoreButton.addEventListener('click', () => {
             const currentPage = parseInt(loadMoreButton.dataset.page) || 1;
             const nextPage = currentPage + 1;
-
             loadPhotos(nextPage); // Charger plus de photos
         });
     }
@@ -32,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('date_order', dateOrder);
         formData.append('page', page);
         formData.append('per_page', 8);
+        formData.append('security', ajax_params.ajax_nonce); // Ajout du nonce
 
         fetch(ajax_params.ajax_url, {
             method: 'POST',
@@ -51,13 +51,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {
                         photosGallery.insertAdjacentHTML('beforeend', data.html);
                     }
-
-                    // Attacher les événements aux nouvelles images chargées
-                    attachFullscreenEvents();
+                    attachFullscreenEvents(); // Attacher les événements aux nouvelles images chargées
                 } else {
                     console.error('Element .photos-gallery not found');
                 }
-
                 loadMoreButton.dataset.page = page;
                 if (data.total > page * 8) {
                     loadMoreButton.style.display = 'block';
@@ -80,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const imageUrl = this.dataset.imageUrl;
                 const reference = this.dataset.reference;
                 const category = this.dataset.category;
-
                 openLightbox(imageUrl, reference, category);
             });
         });
@@ -111,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-
         observer.observe(photosGallery, { childList: true, subtree: true });
     }
 });
