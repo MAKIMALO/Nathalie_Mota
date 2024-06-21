@@ -16,8 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Fonction pour ouvrir la lightbox
     function openLightbox(imageUrl, reference, category, orientation) {
-        console.log("Ouvrir la lightbox pour :", imageUrl, reference, category, orientation);
-
         lightboxImage.src = imageUrl;
         lightboxReference.textContent = reference;
         lightboxCategory.textContent = category;
