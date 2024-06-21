@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         loadMoreButton.addEventListener('click', () => {
             const currentPage = parseInt(loadMoreButton.dataset.page) || 1;
             const nextPage = currentPage + 1;
-            loadPhotos(nextPage); // Charger plus de photos
+            loadPhotos(nextPage);
         });
     }
 
@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const categorySwitch = document.querySelector('#category-switch');
         const formatSwitch = document.querySelector('#format-switch');
         const dateSwitch = document.querySelector('#date-switch');
+
+        // Vérification de l'existence des sélecteurs
+        if (!categorySwitch || !formatSwitch || !dateSwitch) {
+        console.error('Un ou plusieurs sélecteurs n\'existent pas.');
+        return; // Arrête la fonction si un sélecteur est manquant
+        }
 
         const category = categorySwitch ? categorySwitch.closest('.dropdown').querySelector('.dropdown__filter-selected').dataset.value : '';
         const format = formatSwitch ? formatSwitch.closest('.dropdown').querySelector('.dropdown__filter-selected').dataset.value : '';
@@ -31,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('date_order', dateOrder);
         formData.append('page', page);
         formData.append('per_page', 8);
+        formData.append('security', ajax_params.ajax_nonce);
 
         fetch(ajax_params.ajax_url, {
             method: 'POST',

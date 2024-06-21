@@ -7,7 +7,6 @@ $all_photos_args = array(
     'posts_per_page' => -1,
     'orderby' => 'date',
     'order' => 'DESC'
-    // Autres arguments de requête si nécessaire
 );
 $all_photos_query = new WP_Query($all_photos_args);
 
