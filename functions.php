@@ -27,7 +27,6 @@ function theme_enqueue_scripts() {
     wp_enqueue_script( 'photo_gallery-script', get_template_directory_uri() . '/js/photo_gallery.js', array(), '1.2', true );
     wp_localize_script('photo_gallery-script', 'ajax_params', array(
         'ajax_url' => admin_url('admin-ajax.php'),
-        'ajax_nonce' => wp_create_nonce('load_more_photos_nonce')
     ));
 
     // Enqueue lightbox script
@@ -105,13 +104,6 @@ function load_photos() {
     $category = isset($_POST['category']) ? intval($_POST['category']) : '';
     $format = isset($_POST['format']) ? intval($_POST['format']) : '';
     $date_order = isset($_POST['date_order']) ? sanitize_text_field($_POST['date_order']) : 'DESC';
-
-    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'load_more_photos_nonce')) {
-        wp_send_json_error([
-            'message' => 'Nonce ne fonctionne pas'
-        ]);
-        die();
-    }
 
     $args = array(
         'post_type' => 'photos',

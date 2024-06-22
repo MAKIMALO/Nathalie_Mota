@@ -1,5 +1,4 @@
 console.log("le fichier photo_gallery.js fonctionne");
-console.log("Nonce: ", ajax_params.ajax_nonce);
 
 document.addEventListener('DOMContentLoaded', function() {
     const photosGallery = document.querySelector('.photos-gallery');
@@ -38,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('date_order', dateOrder);
         formData.append('page', page);
         formData.append('per_page', 8);
-        formData.append('nonce', ajax_params.ajax_nonce);
 
         fetch(ajax_params.ajax_url, {
             method: 'POST',
@@ -52,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             if (data.success) {
+                console.log("Photos loaded successfully:", data);
                 if (photosGallery) {
                     if (page === 1) {
                         photosGallery.innerHTML = data.html;
